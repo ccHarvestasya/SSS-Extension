@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import Popup from './Popup'
 import Options from './Options'
 import reportWebVitals from './reportWebVitals'
@@ -7,25 +7,25 @@ import { RecoilRoot } from 'recoil'
 import './style.css'
 
 if (process.env.REACT_APP_TARGET === 'popup') {
-  ReactDOM.render(
+  const container = document.getElementById('root') || document.createElement('div');
+  ReactDOM.createRoot(container).render(
     <React.StrictMode>
       <RecoilRoot>
         <Popup />
       </RecoilRoot>
-    </React.StrictMode>,
-    document.getElementById('root') || document.createElement('div')
-  )
+    </React.StrictMode>
+  );
 }
 
 if (process.env.REACT_APP_TARGET === 'options') {
-  ReactDOM.render(
+  const container = document.getElementById('root') || document.createElement('div');
+  ReactDOM.createRoot(container).render(
     <React.StrictMode>
       <RecoilRoot>
         <Options />
       </RecoilRoot>
-    </React.StrictMode>,
-    document.getElementById('root') || document.createElement('div')
-  )
+    </React.StrictMode>
+  );
 }
 
 // If you want to start measuring performance in your app, pass a function

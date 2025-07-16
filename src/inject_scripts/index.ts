@@ -45,7 +45,7 @@ window.requestSSS = () => {
     {
       function: REQUEST_SSS,
     },
-    '*'
+    '*',
   )
   return false
 }
@@ -59,7 +59,7 @@ window.addEventListener('focus', function () {
     {
       function: FOCUS_PAGE,
     },
-    '*'
+    '*',
   )
 })
 
@@ -70,7 +70,7 @@ const injectSSS = (
   publicKey: string,
   address: string,
   name: string,
-  lang: string
+  lang: string,
 ) => {
   createSnackbar(lang)
   setTimeout(() => {
@@ -126,10 +126,10 @@ window.addEventListener(
           event.data.publicKey,
           event.data.address,
           event.data.name,
-          event.data.lang
+          event.data.lang,
         )
       }
     }
   },
-  true
+  true,
 )

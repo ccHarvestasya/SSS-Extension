@@ -23,14 +23,14 @@ declare const window: SSSWindow
 export const getActiveAccountToken = (
   publicKey: string,
   payload?: any,
-  encryptedMessage?: string
+  encryptedMessage?: string,
 ): Promise<string> => {
   const defaultPayload = {
     signerAddress: window.SSS.activeAddress,
     iat: new Date().getTime(),
     verifierAddress: PublicAccount.createFromPublicKey(
       publicKey,
-      window.SSS.activeNetworkType
+      window.SSS.activeNetworkType,
     ).address.plain(),
     netWork: window.SSS.activeNetworkType,
   }
@@ -44,7 +44,7 @@ export const getActiveAccountToken = (
       message: JSON.stringify(p),
       pubkey: publicKey,
     },
-    '*'
+    '*',
   )
 
   if (!window.SSS.isSet) {
@@ -57,7 +57,7 @@ export const getActiveAccountToken = (
     {
       function: REQUEST_ACTIVE_ACCOUNT_TOKEN,
     },
-    '*'
+    '*',
   )
 
   showSnackbar('alert_request_sign')
@@ -79,7 +79,7 @@ export const getActiveAccountToken = (
           {
             function: REMOVE_DATA,
           },
-          '*'
+          '*',
         )
         clearInterval(timer)
         reject('ERROR: The transaction was not signed.')
@@ -98,7 +98,7 @@ export const setEncriptionMessage = (message: string, pubkey: string) => {
       message: message,
       pubkey: pubkey,
     },
-    '*'
+    '*',
   )
 }
 
@@ -112,7 +112,7 @@ export const requestEncriptMessage = (): Promise<EncryptedMessage> => {
     {
       function: REQUEST_MESSAGE_ENCODE,
     },
-    '*'
+    '*',
   )
 
   showSnackbar('alert_request_sign')
@@ -133,7 +133,7 @@ export const requestEncriptMessage = (): Promise<EncryptedMessage> => {
           {
             function: REMOVE_DATA,
           },
-          '*'
+          '*',
         )
         clearInterval(timer)
         reject('ERROR: The transaction was not signed.')
@@ -152,7 +152,7 @@ export const setEncryptedMessage = (message: string, publickKey: string) => {
       message: message,
       pubkey: publickKey,
     },
-    '*'
+    '*',
   )
 }
 
@@ -166,7 +166,7 @@ export const requestDecriptMessage = (): Promise<string> => {
     {
       function: REQUEST_MESSAGE_DECODE,
     },
-    '*'
+    '*',
   )
 
   showSnackbar('alert_request_sign')
@@ -187,7 +187,7 @@ export const requestDecriptMessage = (): Promise<string> => {
           {
             function: REMOVE_DATA,
           },
-          '*'
+          '*',
         )
         clearInterval(timer)
         reject('ERROR: The transaction was not signed.')

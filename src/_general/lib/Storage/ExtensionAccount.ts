@@ -11,7 +11,7 @@ export const addExtensionAccount = (account: IExtensionAccount) => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(['extensionAccounts', 'accountsCount'], (data) => {
       const test = data.extensionAccounts.filter(
-        (e: ExtensionAccount) => e.address === account.address
+        (e: ExtensionAccount) => e.address === account.address,
       )
 
       if (test.length !== 0) {
@@ -32,13 +32,14 @@ export const addExtensionAccount = (account: IExtensionAccount) => {
             // 追加したアカウントと同じネットワークのアカウントが一つもなかったらアクティブアカウントにする
             const nt = getNetworkTypeByAddress(account.address)
             const arr = data.extensionAccounts.filter(
-              (e: ExtensionAccount) => getNetworkTypeByAddress(e.address) === nt
+              (e: ExtensionAccount) =>
+                getNetworkTypeByAddress(e.address) === nt,
             )
 
             if (arr.length === 0) {
               setActiveAccountV2(
                 data.accountsCount,
-                getNetworkTypeByAddress(account.address)
+                getNetworkTypeByAddress(account.address),
               )
             }
             //
@@ -58,7 +59,7 @@ export const getExtensionAccounts = (): Promise<ExtensionAccount[]> => {
   })
 }
 export const getExtensionAccount = (
-  arrayNum: number
+  arrayNum: number,
 ): Promise<ExtensionAccount> => {
   return new Promise((resolve, reject) => {
     getExtensionAccounts().then((extensionAccounts) => {
@@ -73,7 +74,7 @@ export const getExtensionAccount = (
 
 export const deleteExtensionAccount = (
   arrayNum: number,
-  network: NetworkType
+  network: NetworkType,
 ) => {
   return new Promise((resolve, reject) => {
     chrome.storage.local.get(['extensionAccounts', 'accountsCount'], (data) => {
@@ -89,7 +90,7 @@ export const deleteExtensionAccount = (
           }
           const newExtensionAccounts: ExtensionAccount[] =
             data.extensionAccounts.filter(
-              (_acc: ExtensionAccount, i: number) => arrayNum !== i
+              (_acc: ExtensionAccount, i: number) => arrayNum !== i,
             )
           const newAccountsCount: number = data.accountsCount - 1
 

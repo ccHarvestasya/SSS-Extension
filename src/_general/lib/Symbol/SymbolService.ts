@@ -21,7 +21,7 @@ export type MosaicData = {
 
 export const getAddressMosaics = (
   address: Address,
-  url: string
+  url: string,
 ): Promise<MosaicData[]> => {
   const NODE_URL = url
   const repositoryFactory = new RepositoryFactoryHttp(NODE_URL)
@@ -61,7 +61,7 @@ export const getAddressMosaics = (
                     })
                   }
                 },
-                (err) => console.error(err)
+                (err) => console.error(err),
               )
             }
             resolve(mosaics)
@@ -77,7 +77,7 @@ export const getAddressMosaics = (
 }
 export const getAddressXym = (
   address: Address,
-  url: string
+  url: string,
 ): Promise<number> => {
   const net_type = getNetworkTypeByAddress(address.plain())
 
@@ -108,7 +108,7 @@ export const getTransactions = (
   address: Address,
   pageNum: number,
   url: string,
-  pageSize: number = 50
+  pageSize: number = 50,
 ): Promise<Page<Transaction>> => {
   const NODE_URL = url
   const repositoryFactory = new RepositoryFactoryHttp(NODE_URL)
@@ -136,7 +136,7 @@ export const getTransactions = (
 export const getTimeStamp = (
   height: UInt64,
   netType: NetworkType,
-  url: string
+  url: string,
 ): Promise<Date> => {
   const NODE_URL = url
   const repositoryFactory = new RepositoryFactoryHttp(NODE_URL)

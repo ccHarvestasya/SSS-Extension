@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 *.zip
 
 # misc
@@ -24,4 +25,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn/*
+.yarn/*
+
+*storybook.log
+storybook-static

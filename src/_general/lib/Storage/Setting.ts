@@ -82,7 +82,7 @@ export const resetLocalSession = (): void => {
 export const checkLoginSession = (): boolean => {
   const now = new Date().getTime()
   const session = JSON.parse(
-    localStorage.getItem('login_session') || '{}'
+    localStorage.getItem('login_session') || '{}',
   ).session
 
   return now < session

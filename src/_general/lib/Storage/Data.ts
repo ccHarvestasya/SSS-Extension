@@ -25,7 +25,7 @@ export const setMessageV2 = (
   message: string,
   publicKey: string,
   type: 'PLAIN' | 'ENCRYPTED',
-  tabId: number
+  tabId: number,
 ) => {
   const data: Data = {
     tabId,

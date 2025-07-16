@@ -8,7 +8,7 @@ const PRIKEY_PATTERN = /[A-F0-9]{64}/
 
 export const validateRef = (
   ref: RefObject<HTMLInputElement>,
-  f?: (s: string) => string
+  f?: (s: string) => string,
 ): string => {
   if (ref === null || ref.current === null) return ''
   if (f === undefined) return ref.current.value
@@ -35,7 +35,7 @@ export const validatePrivateKey = (priKey: string): string => {
 export const checkPassword = (
   encriptedPrivateKey: string,
   pass: string,
-  address: string
+  address: string,
 ): boolean => {
   try {
     const priKey = decrypt(encriptedPrivateKey, pass)

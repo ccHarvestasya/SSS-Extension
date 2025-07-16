@@ -19,7 +19,7 @@ export const setTransaction = (tx: Transaction) => {
   const serializedTx = tx.serialize()
   const transactionURI = new TransactionURI(
     serializedTx,
-    TransactionMapping.createFromPayload
+    TransactionMapping.createFromPayload,
   ).build()
 
   window.SSS.isSet = true
@@ -29,14 +29,14 @@ export const setTransaction = (tx: Transaction) => {
       function: SET_TRANSACTION,
       tx: transactionURI,
     },
-    '*'
+    '*',
   )
 }
 
 export const setTransactionByPayload = (serializedTx: string) => {
   const transactionURI = new TransactionURI(
     serializedTx,
-    TransactionMapping.createFromPayload
+    TransactionMapping.createFromPayload,
   ).build()
 
   window.SSS.isSet = true
@@ -46,7 +46,7 @@ export const setTransactionByPayload = (serializedTx: string) => {
       function: SET_TRANSACTION,
       tx: transactionURI,
     },
-    '*'
+    '*',
   )
 }
 
@@ -61,7 +61,7 @@ export const requestSign = (): Promise<SignedTransaction> => {
     {
       function: REQUEST_SIGN,
     },
-    '*'
+    '*',
   )
 
   showSnackbar('alert_request_sign')
@@ -81,8 +81,8 @@ export const requestSign = (): Promise<SignedTransaction> => {
             window.SSS.signedTx.hash,
             window.SSS.signedTx.signerPublicKey,
             window.SSS.signedTx.type,
-            window.SSS.signedTx.networkType
-          )
+            window.SSS.signedTx.networkType,
+          ),
         )
       }
       if (600 < count) {
@@ -90,7 +90,7 @@ export const requestSign = (): Promise<SignedTransaction> => {
           {
             function: REMOVE_DATA,
           },
-          '*'
+          '*',
         )
         clearInterval(timer)
         reject('ERROR: The transaction was not signed.')

@@ -1,5 +1,5 @@
 import Component, { Props } from './SymbolLogo'
-import { Story, Meta } from '@storybook/react'
+import { Story, Meta } from '@storybook/react-vite'
 
 export default {
   title: 'UI/Logo',

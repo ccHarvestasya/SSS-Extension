@@ -4,7 +4,10 @@ export interface IEncriptionMessage {
 }
 
 export class EncriptionMessage implements IEncriptionMessage {
-  constructor(public message: string, public pubkey: string) {}
+  constructor(
+    public message: string,
+    public pubkey: string,
+  ) {}
 
   public getEncriptionMessage(): IEncriptionMessage {
     return {

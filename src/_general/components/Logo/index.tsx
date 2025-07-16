@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
-import { ReactComponent as SVG } from './logo.svg'
-import { ReactComponent as SSVG } from './squarelogo.svg'
+import SVG from './logo.svg?react'
+import SSVG from './squarelogo.svg?react'
 
 export interface Props {
   onClick: () => void

@@ -25,7 +25,7 @@ const encrypting = (value: string, iv: Buffer) => {
 export const getEncriptedPrivateKey = (
   value: string,
   iv: Buffer,
-  password: string
+  password: string,
 ) => {
   const k = encrypting(value, iv)
   const ivWithEncrypted = iv.toString('base64') + delimiter + k
@@ -38,7 +38,7 @@ const decrypting = (value: string, iv: string) => {
   const decipher = crypto.createDecipheriv(
     algorithm,
     seed,
-    Buffer.from(iv, 'base64')
+    Buffer.from(iv, 'base64'),
   )
   const decrypted =
     decipher.update(value, 'base64', 'utf8') + decipher.final('utf8')
@@ -47,7 +47,7 @@ const decrypting = (value: string, iv: string) => {
 
 export const decriptPrivateKey = (encryptedValue: string, password: string) => {
   const tmp = CryptoJS.AES.decrypt(encryptedValue, password).toString(
-    CryptoJS.enc.Utf8
+    CryptoJS.enc.Utf8,
   )
   const [iv, encrypted] = tmp.split(delimiter)
 

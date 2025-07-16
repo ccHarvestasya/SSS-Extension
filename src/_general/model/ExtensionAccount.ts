@@ -21,18 +21,18 @@ export class ExtensionAccount implements IExtensionAccount {
     public encriptedPrivateKey: string,
     public publicKey: string,
     public address: string,
-    public type: AccountType
+    public type: AccountType,
   ) {}
 
   public static createExtensionAccount(
-    acc: ExtensionAccount
+    acc: ExtensionAccount,
   ): ExtensionAccount {
     return new ExtensionAccount(
       acc.name,
       acc.encriptedPrivateKey,
       acc.publicKey,
       acc.address,
-      acc.type
+      acc.type,
     )
   }
 
@@ -57,7 +57,7 @@ export class ExtensionAccount implements IExtensionAccount {
   public getPublicAccount(): PublicAccount {
     return PublicAccount.createFromPublicKey(
       this.publicKey,
-      this.getNetworktype()
+      this.getNetworktype(),
     )
   }
 

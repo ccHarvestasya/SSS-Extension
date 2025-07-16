@@ -13,7 +13,7 @@ interface SSSWindow extends Window {
 declare const window: SSSWindow
 
 export const requestSignWithCosignatories = (
-  cosignatories: Account[]
+  cosignatories: Account[],
 ): Promise<SignedTransaction> => {
   if (!window.SSS.isSet) {
     console.error('404')
@@ -25,7 +25,7 @@ export const requestSignWithCosignatories = (
       function: REQUEST_SIGN_WITH_COSIGNATORIES,
       cosignatories: cosignatories.map((c) => c.privateKey),
     },
-    '*'
+    '*',
   )
 
   showSnackbar('alert_request_sign')
@@ -45,8 +45,8 @@ export const requestSignWithCosignatories = (
             window.SSS.signedTx.hash,
             window.SSS.signedTx.signerPublicKey,
             window.SSS.signedTx.type,
-            window.SSS.signedTx.networkType
-          )
+            window.SSS.signedTx.networkType,
+          ),
         )
       }
       if (600 < count) {

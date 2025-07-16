@@ -1,5 +1,5 @@
 import React from 'react'
-import { Story, Meta } from '@storybook/react'
+import { Story, Meta } from '@storybook/react-vite'
 
 import TransactionHistory, { Props } from '.'
 import { Address } from 'symbol-sdk'

@@ -22,7 +22,7 @@ export const requestSignCosignatureTransaction =
       {
         function: REQUEST_SIGN_COSIGNATURE,
       },
-      '*'
+      '*',
     )
 
     showSnackbar('alert_request_sign')
@@ -42,8 +42,8 @@ export const requestSignCosignatureTransaction =
               tx.parentHash,
               tx.signature,
               tx.signerPublicKey,
-              UInt64.fromNumericString('0')
-            )
+              UInt64.fromNumericString('0'),
+            ),
           )
         }
         if (600 < count) {

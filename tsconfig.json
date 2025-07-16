@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -14,8 +14,8 @@
     "declarationMap": false,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -26,15 +26,8 @@
   ],
   "exclude": [
     "node_modules",
-    "bower_components",
-    "jspm_packages",
     "src/content_scripts",
     "src/background_scripts",
     "src/inject_scripts"
-  ],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    }
-  }
+  ]
 }

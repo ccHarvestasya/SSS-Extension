@@ -36,7 +36,7 @@ export const getAccountIndexByAddress = (addr: string): Promise<number> => {
 }
 
 export const getActiveAccountV2 = (
-  network: NetworkType
+  network: NetworkType,
 ): Promise<ExtensionAccount> => {
   return new Promise((resolve, reject) => {
     getStorage('activeAccounts').then((data) => {
@@ -59,7 +59,7 @@ export const setActiveAccountV2 = (arrayNum: number, network: NetworkType) => {
   return new Promise((resolve) => {
     getStorage('activeAccounts').then((data) => {
       const activeAccounts: ActiveAccount[] = (data as ActiveAccount[]).filter(
-        (a) => a.net_type !== network
+        (a) => a.net_type !== network,
       )
 
       // console.log({ activeAccounts })

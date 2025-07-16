@@ -61,7 +61,7 @@ const injectSSS = () => {
             name: activeAccount.name,
             lang: setting.lang,
           },
-          window.opener
+          window.opener,
         )
       }, 50)
     })
@@ -79,7 +79,7 @@ const isAllowedDoamin = () => {
       if (res.status) {
         injectSSS()
       }
-    }
+    },
   )
 }
 
@@ -160,7 +160,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         type: SIGN_TRANSACTION,
         signedTx: message.signedTx,
       },
-      window.opener
+      window.opener,
     )
   }
   if (message.type === SIGN_MESSAGE) {
@@ -169,7 +169,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         type: SIGN_MESSAGE,
         encryptMessage: message.encryptMessage,
       },
-      window.opener
+      window.opener,
     )
   }
   if (message.type === SIGN_MESSAGE_DECRYPT) {
@@ -179,7 +179,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         type: SIGN_MESSAGE_DECRYPT,
         decryptMessage: message.decryptMessage,
       },
-      window.opener
+      window.opener,
     )
   }
 

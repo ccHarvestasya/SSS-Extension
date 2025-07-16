@@ -13,12 +13,15 @@ export const encription = (
   message: string,
   pubKey: string,
   extensionAccount: ExtensionAccount,
-  password: string
+  password: string,
 ) => {
   const acc = extensionAccount.getAccount(password)
   const msg = acc.encryptMessage(
     message,
-    PublicAccount.createFromPublicKey(pubKey, extensionAccount.getNetworktype())
+    PublicAccount.createFromPublicKey(
+      pubKey,
+      extensionAccount.getNetworktype(),
+    ),
   )
   chrome.runtime.sendMessage({
     type: SIGN_MESSAGE,
@@ -29,7 +32,7 @@ export const encription = (
 export const sign = (
   transaction: Transaction,
   extensionAccount: ExtensionAccount,
-  password: string
+  password: string,
 ) => {
   const generationHash = extensionAccount.getGenerationHash()
   const acc = extensionAccount.getAccount(password)
@@ -45,14 +48,14 @@ export const sign = (
 export const signCosignatureTransaction = (
   payload: string,
   extensionAccount: ExtensionAccount,
-  password: string
+  password: string,
 ) => {
   const acc = extensionAccount.getAccount(password)
   const generationHash = extensionAccount.getGenerationHash()
   const signedTx = CosignatureTransaction.signTransactionPayload(
     acc,
     payload,
-    generationHash
+    generationHash,
   )
   chrome.runtime.sendMessage({
     type: SIGN_TRANSACTION,
@@ -64,7 +67,7 @@ export const signWithCosignatories = (
   transaction: AggregateTransaction,
   accounts: Account[],
   extensionAccount: ExtensionAccount,
-  password: string
+  password: string,
 ) => {
   const acc = extensionAccount.getAccount(password)
 
@@ -73,7 +76,7 @@ export const signWithCosignatories = (
   const signedTx = acc.signTransactionWithCosignatories(
     transaction,
     accounts,
-    generationHash
+    generationHash,
   )
   addHistory(signedTx)
   chrome.runtime.sendMessage({
