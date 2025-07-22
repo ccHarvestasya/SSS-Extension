@@ -34,11 +34,11 @@ export const showSnackbar = (text: string) => {
   } else {
     createSnackbar()
     const sn = document.getElementById('SSS_snackbar')
-    sn.innerText = i18next.t(text)
-    sn.classList.add('show_SSS_snackbar')
+    sn!.innerText = i18next.t(text)
+    sn!.classList.add('show_SSS_snackbar')
 
     setTimeout(() => {
-      sn.classList.remove('show_SSS_snackbar')
+      sn!.classList.remove('show_SSS_snackbar')
     }, 3000)
     return
   }

@@ -2,26 +2,26 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
 import { Address, Transaction } from 'symbol-sdk'
-import { getTransactions } from '../../../../_general/lib/Symbol/SymbolService'
-import { getTransactionType } from '../../../../_general/lib/TransactionType'
-import Item from './Item'
+import { getTransactions } from '../../../../_general/lib/Symbol/SymbolService.js'
+import { getTransactionType } from '../../../../_general/lib/TransactionType/index.js'
+import Item from './Item.js'
 import { Divider, IconButton } from '@mui/material'
-import Spacer from '../../../../_general/components/Spacer'
-import Typography from '../../../../_general/components/Typography'
-import Color from '../../../../_general/utils/Color'
+import Spacer from '../../../../_general/components/Spacer/index.js'
+import Typography from '../../../../_general/components/Typography/index.js'
+import Color from '../../../../_general/utils/Color.js'
 
 import { useTranslation } from 'react-i18next'
 import { IconContext } from 'react-icons'
 import { MdArrowRight, MdArrowLeft } from 'react-icons/md'
 
 import { useRecoilState } from 'recoil'
-import { networkAtom } from '../../../../_general/utils/Atom'
+import { networkAtom } from '../../../../_general/utils/Atom.js'
 
 export type Props = {
   address: Address
 }
 
-const Component: React.VFC<Props> = ({ address }) => {
+const Component: React.FC<Props> = ({ address }) => {
   const [t] = useTranslation()
   const [network] = useRecoilState(networkAtom)
 
@@ -86,7 +86,7 @@ const Component: React.VFC<Props> = ({ address }) => {
       </Spacer>
       <Divider />
       {transactions.map((tx) => {
-        if (!!tx.transactionInfo) {
+        if (tx.transactionInfo) {
           const txInfo = tx.transactionInfo
           const type = tx.type
           return (

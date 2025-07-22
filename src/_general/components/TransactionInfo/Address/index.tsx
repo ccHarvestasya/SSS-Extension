@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import styled from '@emotion/styled'
-import Typography from '../../Typography'
+import Typography from '../../Typography/index.js'
 import {
   NamespaceId,
   NamespaceService,
@@ -10,13 +10,13 @@ import {
 } from 'symbol-sdk'
 
 import { useRecoilState } from 'recoil'
-import { networkAtom } from '../../../utils/Atom'
+import { networkAtom } from '../../../utils/Atom.js'
 
 export type Props = {
   address: UnresolvedAddress
 }
 
-const TxAddress: React.VFC<Props> = ({ address }) => {
+const TxAddress: React.FC<Props> = ({ address }) => {
   const [network] = useRecoilState(networkAtom)
   const [addr, setAddr] = useState('')
   useEffect(() => {

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-import { getAllowList } from '../../../_general/lib/Storage'
-import AllowList from './AllowList'
+import { getAllowList } from '../../../_general/lib/Storage/index.js'
+import AllowList from './AllowList.js'
 interface Props {
   reload: () => void
   update: Date
 }
 
-const Options: React.VFC<Props> = ({ reload, update }) => {
+const Options: React.FC<Props> = ({ reload, update }) => {
   const [allowList, setAllowList] = useState<string[]>([])
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { Snackbar, SnackbarType } from '.'
+import { Snackbar, SnackbarType } from './index.js'
 
 export {}
 

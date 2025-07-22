@@ -1,14 +1,14 @@
 import React from 'react'
 
 import styled from '@emotion/styled'
-import Typography from '../../Typography'
+import Typography from '../../Typography/index.js'
 
 export type Props = {
   metadataKey: string
   value: string
 }
 
-const TxMessage: React.VFC<Props> = ({ metadataKey, value }) => {
+const TxMetadata: React.FC<Props> = ({ metadataKey, value }) => {
   return (
     <Wrapper>
       <Typography text="Metadata" fontSize={24} />
@@ -20,7 +20,7 @@ const TxMessage: React.VFC<Props> = ({ metadataKey, value }) => {
   )
 }
 
-export default TxMessage
+export default TxMetadata
 
 const Wrapper = styled('div')({
   margin: '8px',

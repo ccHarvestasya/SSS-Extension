@@ -2,16 +2,16 @@ import React from 'react'
 
 import styled from '@emotion/styled'
 import { AggregateTransaction } from 'symbol-sdk'
-import Typography from '../Typography'
+import Typography from '../Typography/index.js'
 import { Divider } from '@mui/material'
-import TransactionCard from '../../../Popup/pages/components/TransactionCard'
-import { getTransactionType } from '../../lib/TransactionType'
+import TransactionCard from '../../../Popup/pages/components/TransactionCard.js'
+import { getTransactionType } from '../../lib/TransactionType/index.js'
 
 type AggregateComplateProps = {
   transaction: AggregateTransaction
 }
 
-const AggregateComplateTransactionCard: React.VFC<AggregateComplateProps> = ({
+const AggregateComplateTransactionCard: React.FC<AggregateComplateProps> = ({
   transaction,
 }) => {
   return (

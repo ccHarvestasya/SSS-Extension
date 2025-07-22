@@ -1,22 +1,22 @@
 import React, { Dispatch, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { useTranslation } from 'react-i18next'
-import Typography from '../../../_general/components/Typography'
-import Button from '../../../_general/components/Button'
+import Typography from '../../../_general/components/Typography/index.js'
+import Button from '../../../_general/components/Button/index.js'
 import { NetworkType, SignedTransaction } from 'symbol-sdk'
 import {
   deleteAllAccount,
   deleteAllDomain,
   getHistory,
   initializeSetting,
-} from '../../../_general/lib/Storage'
+} from '../../../_general/lib/Storage/index.js'
 import {
   Setting,
   changeLang,
   changeNetwork,
   changeSession,
   resetLocalSession,
-} from '../../../_general/lib/Storage/Setting'
+} from '../../../_general/lib/Storage/Setting.js'
 import {
   FormControl,
   InputLabel,
@@ -29,7 +29,7 @@ import {
 
 import { MdExpandMore } from 'react-icons/md'
 import { IconContext } from 'react-icons'
-import Color from '../../../_general/utils/Color'
+import Color from '../../../_general/utils/Color.js'
 interface Props {
   reload: () => void
   update: Date
@@ -100,7 +100,7 @@ const networks = [
   },
 ]
 
-const Options: React.VFC<Props> = ({ reload, update, setting, setSetting }) => {
+const Options: React.FC<Props> = ({ reload, update, setting, setSetting }) => {
   const [history, setHistory] = useState<SignedTransaction[]>([])
 
   const [t] = useTranslation()
@@ -155,7 +155,9 @@ const Options: React.VFC<Props> = ({ reload, update, setting, setSetting }) => {
 
   const changeNet = (val: NetworkType) => {
     changeNetwork(
-      val === NetworkType.MAIN_NET ? NetworkType.MAIN_NET : NetworkType.TEST_NET
+      val === NetworkType.MAIN_NET
+        ? NetworkType.MAIN_NET
+        : NetworkType.TEST_NET,
     ).then(() => {
       reload()
     })
@@ -193,7 +195,8 @@ const Options: React.VFC<Props> = ({ reload, update, setting, setSetting }) => {
               id="setting-network-name"
               value={setting.networkType}
               label="Network"
-              onChange={(e) => changeNet(e.target.value as NetworkType)}>
+              onChange={(e) => changeNet(e.target.value as NetworkType)}
+            >
               {networks.map((n) => (
                 <MenuItem key={n.name} value={n.value}>
                   {n.name}
@@ -217,7 +220,8 @@ const Options: React.VFC<Props> = ({ reload, update, setting, setSetting }) => {
               id="setting-lang-name"
               value={setting.lang}
               label="Language"
-              onChange={(e) => changeLanguage(e.target.value as string)}>
+              onChange={(e) => changeLanguage(e.target.value as string)}
+            >
               {langs.map((l) => (
                 <MenuItem key={l.key} value={l.value}>
                   {l.key}
@@ -245,7 +249,8 @@ const Options: React.VFC<Props> = ({ reload, update, setting, setSetting }) => {
                   ? '0'
                   : `${setting.session / (1000 * 60)} min`
               }
-              onChange={(e) => changeSessionTime(String(e.target.value))}>
+              onChange={(e) => changeSessionTime(String(e.target.value))}
+            >
               {sessionTimes.map((n) => (
                 <MenuItem key={n.key} value={n.key}>
                   {n.key}
@@ -266,7 +271,8 @@ const Options: React.VFC<Props> = ({ reload, update, setting, setSetting }) => {
               </IconContext.Provider>
             }
             aria-controls="panel1a-content"
-            id="panel1a-header">
+            id="panel1a-header"
+          >
             <Typography text={t('setting_delete')} fontSize={24} />
           </AccordionSummary>
           <AccordionDetails>

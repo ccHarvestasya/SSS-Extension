@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { NetworkType, UInt64 } from 'symbol-sdk'
-import { getTimeStamp } from '../../../../_general/lib/Symbol/SymbolService'
-import { getExplorerLinkFromHash } from '../../../../_general/lib/Symbol/Config'
-import Color, { UtilColors } from '../../../../_general/utils/Color'
+import { getTimeStamp } from '../../../../_general/lib/Symbol/SymbolService.js'
+import { getExplorerLinkFromHash } from '../../../../_general/lib/Symbol/Config.js'
+import Color, { UtilColors } from '../../../../_general/utils/Color.js'
 import { Link } from '@mui/material'
 import Avatar from 'boring-avatars'
 
 import { useRecoilState } from 'recoil'
-import { networkAtom } from '../../../../_general/utils/Atom'
+import { networkAtom } from '../../../../_general/utils/Atom.js'
 
 export type Props = {
   type: string
@@ -17,7 +17,7 @@ export type Props = {
   height: UInt64
 }
 
-const Component: React.VFC<Props> = ({ type, hash, netType, height }) => {
+const Component: React.FC<Props> = ({ type, hash, netType, height }) => {
   const [time, setTime] = useState<string>('')
   const [network] = useRecoilState(networkAtom)
 

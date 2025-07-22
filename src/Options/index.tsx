@@ -4,31 +4,31 @@ import styled from '@emotion/styled'
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
-import enJson from '../_general/utils/locales/en.json'
-import jaJson from '../_general/utils/locales/ja.json'
-import koJson from '../_general/utils/locales/ko.json'
-import ruJson from '../_general/utils/locales/ru.json'
-import itJson from '../_general/utils/locales/it.json'
+import enJson from '../_general/utils/locales/en.json' with { type: "json" }
+import jaJson from '../_general/utils/locales/ja.json' with { type: "json" }
+import koJson from '../_general/utils/locales/ko.json' with { type: "json" }
+import ruJson from '../_general/utils/locales/ru.json' with { type: "json" }
+import itJson from '../_general/utils/locales/it.json' with { type: "json" }
 
-import Home from './pages/Home'
-import Header from './components/Header'
-import AccountModal from './components/AccountModal'
-import Settings from './pages/Settings'
-import Allow from './pages/Allow'
-import History from './pages/History'
-import Accounts from './pages/Accounts'
+import Home from './pages/Home/index.js'
+import Header from './components/Header/index.js'
+import AccountModal from './components/AccountModal/index.js'
+import Settings from './pages/Settings/index.js'
+import Allow from './pages/Allow/index.js'
+import History from './pages/History/index.js'
+import Accounts from './pages/Accounts/index.js'
 import {
   Setting,
   getSetting,
   checkLoginSession,
   resetLocalSession,
-} from '../_general/lib/Storage/Setting'
-import Footer from './components/Footer'
-import { getExtensionAccounts } from '../_general/lib/Storage'
+} from '../_general/lib/Storage/Setting.js'
+import Footer from './components/Footer/index.js'
+import { getExtensionAccounts } from '../_general/lib/Storage/index.js'
 
 import { useRecoilState } from 'recoil'
 
-import { networkAtom } from '../_general/utils/Atom'
+import { networkAtom } from '../_general/utils/Atom.js'
 
 import { getActiveNode } from 'symbol-node-util'
 
@@ -51,7 +51,7 @@ i18n.use(initReactI18next).init({
   returnEmptyString: false,
 })
 
-const Options: React.VFC = () => {
+const Options: React.FC = () => {
   const [page, setPage] = useState<Page>('HOME')
 
   const [state, setState] = useState(0)

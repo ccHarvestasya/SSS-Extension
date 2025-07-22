@@ -2,13 +2,12 @@ import React from 'react'
 
 import styled from '@emotion/styled'
 import { MosaicSupplyRevocationTransaction } from 'symbol-sdk'
-import Typography from '../Typography'
-import TxMosaic from '../TransactionInfo/Mosaic'
-import TxAddress from '../TransactionInfo/Address'
+import TxMosaic from '../TransactionInfo/Mosaic/index.js'
+import TxAddress from '../TransactionInfo/Address/index.js'
 type Props = {
   transaction: MosaicSupplyRevocationTransaction
 }
-const MosaicRevocationCard: React.VFC<Props> = ({ transaction }) => {
+const MosaicRevocationCard: React.FC<Props> = ({ transaction }) => {
   return (
     <Wrapper>
       <TxAddress address={transaction.sourceAddress} />

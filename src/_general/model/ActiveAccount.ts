@@ -1,5 +1,5 @@
 import { NetworkType } from 'symbol-sdk'
-import { ExtensionAccount } from './ExtensionAccount'
+import { ExtensionAccount } from './ExtensionAccount.js'
 export interface IActiveAccount {
   account: ExtensionAccount
   net_type: NetworkType

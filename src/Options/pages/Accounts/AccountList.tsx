@@ -2,32 +2,32 @@ import React, { useEffect, useState } from 'react'
 
 import styled from '@emotion/styled'
 
-import Typography from '../../../_general/components/Typography'
+import Typography from '../../../_general/components/Typography/index.js'
 
-import { ExtensionAccount } from '../../../_general/model/ExtensionAccount'
-import AccountMenu from './AccountMenu'
-import { Setting } from '../../../_general/lib/Storage'
+import { ExtensionAccount } from '../../../_general/model/ExtensionAccount.js'
+import AccountMenu from './AccountMenu.js'
+import { Setting } from '../../../_general/lib/Storage/index.js'
 
 import Avatar from 'boring-avatars'
 import { NetworkType } from 'symbol-sdk'
-import { getNetworkTypeByAddress } from '../../../_general/lib/Symbol/Config'
+import { getNetworkTypeByAddress } from '../../../_general/lib/Symbol/Config.js'
 import Color, {
   MainNetColors,
   TestNetColors,
-} from '../../../_general/utils/Color'
+} from '../../../_general/utils/Color.js'
 import { useTranslation } from 'react-i18next'
 import {
   Snackbar,
   SnackbarProps,
   SnackbarType,
-} from '../../../_general/components/Snackbar'
+} from '../../../_general/components/Snackbar/index.js'
 export type Props = {
   extensionAccounts: ExtensionAccount[]
   setting: Setting
   reload: () => void
 }
 
-const Component: React.VFC<Props> = ({
+const Component: React.FC<Props> = ({
   extensionAccounts,
   reload,
   setting,
@@ -89,7 +89,7 @@ const Component: React.VFC<Props> = ({
               </NameWrpper>
               <AccountMenu account={acc} reload={reload} setting={setting} />
             </Name>
-            <Flex isLast={false}>
+            <Flex $isLast={false}>
               <VerticalMargin onClick={() => copyAddress(acc.address)}>
                 <Typography text="Address" fontSize={24} />
                 <Typography
@@ -99,7 +99,7 @@ const Component: React.VFC<Props> = ({
                 />
               </VerticalMargin>
             </Flex>
-            <Flex isLast={true}>
+            <Flex $isLast={true}>
               <VerticalMargin onClick={() => copyPubkey(acc.address)}>
                 <Typography text="PublicKey" fontSize={24} />
                 <Typography
@@ -135,11 +135,11 @@ const Root = styled('div')({
   width: '800px',
 })
 
-const Flex = styled('div')((p: { isLast: boolean }) => ({
+const Flex = styled('div')<{ $isLast: boolean }>((p) => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  marginBottom: p.isLast ? '0px' : '4px',
+  marginBottom: p.$isLast ? '0px' : '4px',
 }))
 
 const Name = styled('div')({

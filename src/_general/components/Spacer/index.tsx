@@ -12,6 +12,7 @@ export interface SpaceProps {
   PRight?: string
   PLeft?: string
   PBottom?: string
+  children?: React.ReactNode
 }
 
 const Spacer: React.FC<SpaceProps> = ({
@@ -27,17 +28,15 @@ const Spacer: React.FC<SpaceProps> = ({
   PLeft = '0',
   children,
 }) => {
-  if (margin === null) margin = `${MTop} ${MRight} ${MBottom} ${MLeft}`
-  if (padding === null) padding = `${PTop} ${PRight} ${PBottom} ${PLeft}`
+  const finalMargin = margin ?? `${MTop} ${MRight} ${MBottom} ${MLeft}`
+  const finalPadding = padding ?? `${PTop} ${PRight} ${PBottom} ${PLeft}`
 
   return (
-    <Style margin={margin} padding={padding}>
+    <Style margin={finalMargin} padding={finalPadding}>
       {children}
     </Style>
   )
 }
-
-export default Spacer
 
 const Style = styled('div')<{
   margin: string
@@ -46,3 +45,5 @@ const Style = styled('div')<{
   margin: ${(props) => props.margin};
   padding: ${(props) => props.padding};
 `
+
+export default Spacer

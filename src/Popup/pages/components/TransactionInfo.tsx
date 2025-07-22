@@ -3,18 +3,18 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { Box } from '@mui/system'
-import TransactionCard from './TransactionCard'
+import TransactionCard from './TransactionCard.js'
 import { TransactionMapping } from 'symbol-sdk'
 import { TransactionURI } from 'symbol-uri-scheme'
-import Typography from '../../../_general/components/Typography'
-import { getTransactionType } from '../../../_general/lib/TransactionType'
+import Typography from '../../../_general/components/Typography/index.js'
+import { getTransactionType } from '../../../_general/lib/TransactionType/index.js'
 import { Chip, Tooltip } from '@mui/material'
 
 export type Props = {
   transaction: string
 }
 
-const Component: React.VFC<Props> = ({ transaction }) => {
+const Component: React.FC<Props> = ({ transaction }) => {
   const tx = TransactionURI.fromURI(
     transaction,
     TransactionMapping.createFromPayload

@@ -1,17 +1,36 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Button, { Props } from './index'
+import Component, { Props } from './index.js'
 import { PlainMessage } from 'symbol-sdk'
 
-export default {
+const meta: Meta<Props> = {
   title: 'TransactionInfo/Message',
-  component: Button,
-} as Meta
+  component: Component,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<Props>
 
-const Template: Story<Props> = (args) => <Button {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Default = Template.bind({})
-Default.args = {
-  message: PlainMessage.create('message'),
+export const Default: Story = {
+  args: {
+    message: PlainMessage.create('message'),
+  },
+}
+
+export const LongMessage: Story = {
+  args: {
+    message: PlainMessage.create(
+      'これは非常に長いメッセージの例です。トランザクションに含まれるメッセージが長い場合の表示を確認できます。',
+    ),
+  },
+}
+
+export const EmptyMessage: Story = {
+  args: {
+    message: PlainMessage.create(''),
+  },
 }

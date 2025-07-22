@@ -2,13 +2,13 @@ import React from 'react'
 
 import styled from '@emotion/styled'
 import { AccountMetadataTransaction, Convert } from 'symbol-sdk'
-import TxAddress from '../TransactionInfo/Address'
-import Metadata from '../TransactionInfo/Metadata'
+import TxAddress from '../TransactionInfo/Address/index.js'
+import Metadata from '../TransactionInfo/Metadata/index.js'
 
 type Props = {
   transaction: AccountMetadataTransaction
 }
-const AccountMetadataCard: React.VFC<Props> = ({ transaction }) => {
+const AccountMetadataCard: React.FC<Props> = ({ transaction }) => {
   return (
     <Wrapper>
       <TxAddress address={transaction.targetAddress} />

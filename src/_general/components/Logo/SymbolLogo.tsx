@@ -1,12 +1,12 @@
+import React from 'react'
 import styled from '@emotion/styled'
-
 import SVG from './symbol.svg?react'
 
 export interface Props {
   onClick: () => void
 }
 
-const Component: React.VFC<Props> = ({ onClick }) => {
+const Component: React.FC<Props> = ({ onClick }) => {
   return (
     <Wrapper onClick={onClick}>
       <SVG />
@@ -18,5 +18,7 @@ export default Component
 
 const Wrapper = styled('span')({
   cursor: 'pointer',
-  width: '48px',
+  '& > svg': {
+    width: '48px',
+  },
 })

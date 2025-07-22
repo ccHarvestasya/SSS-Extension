@@ -2,13 +2,13 @@ import React from 'react'
 
 import styled from '@emotion/styled'
 import { Convert, NamespaceMetadataTransaction } from 'symbol-sdk'
-import Metadata from '../TransactionInfo/Metadata'
-import Typography from '../Typography'
+import Metadata from '../TransactionInfo/Metadata/index.js'
+import Typography from '../Typography/index.js'
 
 type Props = {
   transaction: NamespaceMetadataTransaction
 }
-const AccountMetadataCard: React.VFC<Props> = ({ transaction }) => {
+const AccountMetadataCard: React.FC<Props> = ({ transaction }) => {
   return (
     <Wrapper>
       <Typography text={transaction.targetNamespaceId.toHex()} fontSize={24} />

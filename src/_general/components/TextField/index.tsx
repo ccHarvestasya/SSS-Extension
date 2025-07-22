@@ -1,3 +1,4 @@
+import React, { Dispatch } from 'react'
 import {
   FilledInput,
   FormControl,
@@ -5,22 +6,21 @@ import {
   InputLabel,
   OutlinedInput,
 } from '@mui/material'
-import { Dispatch } from 'react'
 
 export interface Props {
   label: string
   variant?: 'outlined' | 'text' | 'filled'
-  setText: Dispatch<string>
+  setText: Dispatch<React.SetStateAction<string>>
 }
-const TextField: React.VFC<Props> = ({
+
+const TextField: React.FC<Props> = ({
   label,
   setText,
   variant = 'outlined',
-  ...props
 }) => {
   if (variant === 'text') {
     return (
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1 }} variant="standard">
         <InputLabel>{label}</InputLabel>
         <Input onChange={(e) => setText(e.target.value)} />
       </FormControl>
@@ -28,7 +28,7 @@ const TextField: React.VFC<Props> = ({
   }
   if (variant === 'filled') {
     return (
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1 }} variant="filled">
         <InputLabel>{label}</InputLabel>
         <FilledInput onChange={(e) => setText(e.target.value)} />
       </FormControl>
@@ -42,11 +42,13 @@ const TextField: React.VFC<Props> = ({
     </FormControl>
   )
 }
+
 interface InactiveTextFieldProps {
   label: string
   value: string
   variant?: 'outlined' | 'text' | 'filled'
 }
+
 export const InactiveTextField: React.FC<InactiveTextFieldProps> = ({
   label,
   value,
@@ -54,7 +56,7 @@ export const InactiveTextField: React.FC<InactiveTextFieldProps> = ({
 }) => {
   if (variant === 'text') {
     return (
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1 }} variant="standard">
         <InputLabel>{label}</InputLabel>
         <Input value={value} disabled />
       </FormControl>
@@ -62,7 +64,7 @@ export const InactiveTextField: React.FC<InactiveTextFieldProps> = ({
   }
   if (variant === 'filled') {
     return (
-      <FormControl sx={{ m: 1 }} variant="outlined">
+      <FormControl sx={{ m: 1 }} variant="filled">
         <InputLabel>{label}</InputLabel>
         <FilledInput value={value} disabled />
       </FormControl>
@@ -72,7 +74,7 @@ export const InactiveTextField: React.FC<InactiveTextFieldProps> = ({
   return (
     <FormControl sx={{ m: 1 }} variant="outlined">
       <InputLabel>{label}</InputLabel>
-      <OutlinedInput value={value} disabled />
+      <OutlinedInput label={label} value={value} disabled />
     </FormControl>
   )
 }

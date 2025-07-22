@@ -1,17 +1,18 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Button, { Props } from './index'
+import Button, { Props } from './index.js'
 
-export default {
+const meta: Meta<Props> = {
   title: 'Elements/Button',
   component: Button,
-} as Meta
+}
 
-const Template: Story<Props> = (args) => <Button {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Default = Template.bind({})
-Default.args = {
-  text: 'BUTTON',
-  onClick: () => console.log('clicked'),
+export const Default: Story = {
+  args: {
+    text: 'BUTTON',
+    onClick: () => console.log('clicked'),
+  },
 }

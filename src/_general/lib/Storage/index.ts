@@ -1,4 +1,4 @@
-import { InitSetting } from './Setting'
+import { InitSetting } from './Setting.js'
 
 export const version = chrome.runtime.getManifest().version
 
@@ -74,12 +74,12 @@ export const initializeSetting = () => {
   init()
 }
 
-export * from './ExtensionAccount'
+export * from './ExtensionAccount.js'
 // export * from './EncriptionMessage'
-export * from './ActiveAccount'
-export * from './Data'
+export * from './ActiveAccount.js'
+export * from './Data.js'
 // export * from './Transaction'
-export * from './Sign'
-export * from './History'
-export * from './AllowList'
-export * from './Setting'
+export * from './Sign.js'
+export * from './History.js'
+export * from './AllowList.js'
+export * from './Setting.js'

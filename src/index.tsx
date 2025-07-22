@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Popup from './Popup'
-import Options from './Options'
-import reportWebVitals from './reportWebVitals'
+import Popup from './Popup/index.js'
+import Options from './Options/index.js'
+import reportWebVitals from './reportWebVitals.js'
 import { RecoilRoot } from 'recoil'
 import './style.css'
 

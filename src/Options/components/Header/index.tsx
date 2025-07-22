@@ -1,36 +1,38 @@
 import React, { Dispatch, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { Box, Divider, IconButton, Menu, MenuItem } from '@mui/material'
-import Logo from '../../../_general/components/Logo'
-import Spacer from '../../../_general/components/Spacer'
-import { Page, Select } from '../../index'
+import Logo from '../../../_general/components/Logo/index.js'
+import Spacer from '../../../_general/components/Spacer/index.js'
+import { Page, Select } from '../../index.js'
 import Avatar from 'boring-avatars'
 
 import { useTranslation } from 'react-i18next'
-import { ExtensionAccount } from '../../../_general/model/ExtensionAccount'
+import { ExtensionAccount } from '../../../_general/model/ExtensionAccount.js'
 import {
   // getActiveAccount,
   getActiveAccountV2,
   Setting,
-} from '../../../_general/lib/Storage'
+} from '../../../_general/lib/Storage/index.js'
 import Color, {
   MainNetColors,
   TestNetColors,
-} from '../../../_general/utils/Color'
-import { getNetworkTypeByAddress } from '../../../_general/lib/Symbol/Config'
+} from '../../../_general/utils/Color.js'
+import { getNetworkTypeByAddress } from '../../../_general/lib/Symbol/Config.js'
 import { NetworkType } from 'symbol-sdk'
 
 export interface Props {
   page: Page
   setPage: Dispatch<Page>
+  // eslint-disable-next-line no-unused-vars
   handleOpen: (event: React.MouseEvent<HTMLButtonElement>) => void
+  // eslint-disable-next-line no-unused-vars
   handleClose: (select: Select) => void
   anchorEl: null | HTMLElement
   update: Date
   setting: Setting
 }
 
-const Component: React.VFC<Props> = ({
+const Component: React.FC<Props> = ({
   page,
   setPage,
   handleOpen,
@@ -81,7 +83,7 @@ const Component: React.VFC<Props> = ({
       </Spacer>
       <Spacer margin="0px 64px">
         <IconButton onClick={handleOpen}>
-          {!!extensionAccount.address ? (
+          {extensionAccount.address ? (
             <Avatar
               size={40}
               name={extensionAccount.address}

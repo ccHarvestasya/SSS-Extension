@@ -1,9 +1,9 @@
 import { Account, Address, NetworkType, PublicAccount } from 'symbol-sdk'
-import { decrypt } from '../lib/Crypto'
+import { decrypt } from '../lib/Crypto/index.js'
 import {
   getGenerationHash,
   getNetworkTypeByAddress,
-} from '../lib/Symbol/Config'
+} from '../lib/Symbol/Config.js'
 
 export type AccountType = 'PASS' | 'NOPASS' | 'HARD'
 

@@ -1,4 +1,4 @@
-import { setStorage, getStorage } from '.'
+import { setStorage, getStorage } from './index.js'
 
 export const setSignStatus = (status: string) => {
   setStorage({ signStatus: status })

@@ -1,19 +1,31 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react-vite'
-
-import Button, { Props } from './index'
+import type { Meta, StoryObj } from '@storybook/react'
+import { RecoilRoot } from 'recoil'
+import Component, { Props } from './index.js'
 import { Address } from 'symbol-sdk'
 
-export default {
+const meta: Meta<Props> = {
   title: 'TransactionInfo/Address',
-  component: Button,
-} as Meta
+  component: Component,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <RecoilRoot>
+        <Story />
+      </RecoilRoot>
+    ),
+  ],
+} satisfies Meta<Props>
 
-const Template: Story<Props> = (args) => <Button {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Default = Template.bind({})
-Default.args = {
-  address: Address.createFromRawAddress(
-    'TBNXEEHPLX37CHYORRQRD6LJBQ4JI7EKFNTOH5Y'
-  ),
+export const Default: Story = {
+  args: {
+    address: Address.createFromRawAddress(
+      'TBNXEEHPLX37CHYORRQRD6LJBQ4JI7EKFNTOH5Y',
+    ),
+  },
 }

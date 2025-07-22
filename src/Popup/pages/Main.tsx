@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-import { ExtensionAccount } from '../../_general/model/ExtensionAccount'
-import { SquareLogo } from '../../_general/components/Logo/'
+import { ExtensionAccount } from '../../_general/model/ExtensionAccount.js'
+import { SquareLogo } from '../../_general/components/Logo/index.js'
 import {
   Chip,
   IconButton,
@@ -13,47 +13,46 @@ import {
 } from '@mui/material'
 import { IconContext } from 'react-icons'
 import { MdSupervisorAccount } from 'react-icons/md'
-import Typography from '../../_general/components/Typography'
-import Button from '../../_general/components/Button'
-import Color, { addAlpha } from '../../_general/utils/Color'
-import Spacer from '../../_general/components/Spacer'
-import TransactionInfo from './components/TransactionInfo'
+import Typography from '../../_general/components/Typography/index.js'
+import Button from '../../_general/components/Button/index.js'
+import Color, { addAlpha } from '../../_general/utils/Color.js'
+import Spacer from '../../_general/components/Spacer/index.js'
+import TransactionInfo from './components/TransactionInfo.js'
 import {
   addHistory,
   getData,
   getExtensionAccounts,
   resetLocalSession,
   setActiveAccount,
-} from '../../_general/lib/Storage'
+} from '../../_general/lib/Storage/index.js'
 import { TransactionURI } from 'symbol-uri-scheme'
 import {
   Address,
   Convert,
-  EncryptedMessage,
   SignedTransaction,
   Transaction,
   TransactionMapping,
 } from 'symbol-sdk'
-import NotFoundTx from './components/NotFoundTx'
+import NotFoundTx from './components/NotFoundTx.js'
 import {
   ENCRYPTED_MESSAGE,
   MESSAGE,
   TRANSACTION,
-} from '../../_general/model/Data'
+} from '../../_general/model/Data.js'
 import {
   REQUEST_ACTIVE_ACCOUNT_TOKEN,
   REQUEST_MESSAGE_DECODE,
   REQUEST_MESSAGE_ENCODE,
   REQUEST_SIGN,
   SIGN_TRANSACTION,
-} from '../../_general/model/MessageType'
-import MessageEncription from './components/MessageEncription'
-import { getNetworkTypeByAddress } from '../../_general/lib/Symbol/Config'
+} from '../../_general/model/MessageType.js'
+import MessageEncription from './components/MessageEncription.js'
+import { getNetworkTypeByAddress } from '../../_general/lib/Symbol/Config.js'
 import TransportWebHID from '@ledgerhq/hw-transport-webhid'
 import { SymbolLedger, LedgerNetworkType } from 'symbol-ledger-typescript'
 import { useTranslation } from 'react-i18next'
-import { EncriptionMessage } from '../../_general/model/EncriptionMessage'
-import MessageDecription from './components/MessageDecription'
+import { EncriptionMessage } from '../../_general/model/EncriptionMessage.js'
+import MessageDecription from './components/MessageDecription.js'
 
 export interface Props {
   extensionAccount: ExtensionAccount
@@ -64,7 +63,7 @@ export interface Props {
   logout: () => void
 }
 
-const Main: React.VFC<Props> = ({
+const Main: React.FC<Props> = ({
   extensionAccount,
   type,
   signTx,
@@ -86,12 +85,12 @@ const Main: React.VFC<Props> = ({
       }
       if (data.dataType === MESSAGE && !!data.message) {
         setEnMsg(
-          new EncriptionMessage(data.message.msg, data.message.publicKey)
+          new EncriptionMessage(data.message.msg, data.message.publicKey),
         )
       }
       if (data.dataType === ENCRYPTED_MESSAGE && !!data.message) {
         setEnMsg(
-          new EncriptionMessage(data.message.msg, data.message.publicKey)
+          new EncriptionMessage(data.message.msg, data.message.publicKey),
         )
       }
 
@@ -100,7 +99,7 @@ const Main: React.VFC<Props> = ({
       })
 
       if (extensionAccount.type === 'HARD') {
-        TransportWebHID.create(5000, 5000).then(async (transport) => {
+        TransportWebHID.default.create(5000, 5000).then(async (transport) => {
           const ledger = new SymbolLedger(transport, 'XYM')
           try {
             const ledgerNetworkType = LedgerNetworkType.MAIN_NET
@@ -110,14 +109,14 @@ const Main: React.VFC<Props> = ({
               ledgerNetworkType,
               false,
               false,
-              false
+              false,
             )
             const gh = extensionAccount.getGenerationHash()
 
             const t = data.transaction || ''
             const tx = TransactionURI.fromURI(
               t,
-              TransactionMapping.createFromPayload
+              TransactionMapping.createFromPayload,
             ).toTransaction()
 
             if (type === REQUEST_SIGN) {
@@ -128,11 +127,11 @@ const Main: React.VFC<Props> = ({
                     payload,
                     Transaction.createTransactionHash(
                       payload,
-                      Array.from(Convert.hexToUint8(gh))
+                      Array.from(Convert.hexToUint8(gh)),
                     ),
                     publicKey,
                     tx.type,
-                    tx.networkType
+                    tx.networkType,
                   )
 
                   addHistory(signedTx)
@@ -203,7 +202,7 @@ const Main: React.VFC<Props> = ({
     } else {
       const tx = TransactionURI.fromURI(
         transaction,
-        TransactionMapping.createFromPayload
+        TransactionMapping.createFromPayload,
       ).toTransaction()
       signTx(tx)
     }
@@ -230,7 +229,7 @@ const Main: React.VFC<Props> = ({
     if (type === REQUEST_ACTIVE_ACCOUNT_TOKEN && enMsg !== null) {
       const addr = Address.createFromPublicKey(
         enMsg.pubkey,
-        getNetworkTypeByAddress(extensionAccount.address)
+        getNetworkTypeByAddress(extensionAccount.address),
       )
       return (
         <Contents>
@@ -283,7 +282,8 @@ const Main: React.VFC<Props> = ({
                 maxHeight: 400,
                 position: 'relative',
                 overflow: 'auto',
-              }}>
+              }}
+            >
               {accounts.map((a, i) => {
                 return (
                   <SListItem onClick={() => handleClick(i)} key={a.address}>

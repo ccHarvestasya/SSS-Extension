@@ -1,25 +1,40 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
+import { RecoilRoot } from 'recoil'
 
-import TransactionHistory, { Props } from '.'
+import TransactionHistory, { Props } from './index.js'
 import { Address } from 'symbol-sdk'
 
-export default {
+const meta: Meta<Props> = {
   title: 'Option/TransactionHistory',
   component: TransactionHistory,
-} as Meta
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <RecoilRoot>
+        <Story />
+      </RecoilRoot>
+    ),
+  ],
+} satisfies Meta<Props>
 
-const Template: Story<Props> = (args) => <TransactionHistory {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Main = Template.bind({})
-Main.args = {
-  address: Address.createFromRawAddress(
-    'NAW7L44MVKCVBM6IGEBXLF2K7JYKEP6R5XMCEZA'
-  ),
+export const Main: Story = {
+  args: {
+    address: Address.createFromRawAddress(
+      'NAW7L44MVKCVBM6IGEBXLF2K7JYKEP6R5XMCEZA',
+    ),
+  },
 }
-export const Test = Template.bind({})
-Test.args = {
-  address: Address.createFromRawAddress(
-    'TD55KXAFNATAHOPEDST2V4MLOL43DGCELZS6PGA'
-  ),
+
+export const Test: Story = {
+  args: {
+    address: Address.createFromRawAddress(
+      'TD55KXAFNATAHOPEDST2V4MLOL43DGCELZS6PGA',
+    ),
+  },
 }

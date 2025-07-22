@@ -1,14 +1,20 @@
-import Component, { Props } from './SymbolLogo'
-import { Story, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
+import Component, { Props } from './SymbolLogo.js'
 
-export default {
+const meta: Meta<Props> = {
   title: 'UI/Logo',
   component: Component,
-} as Meta
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<Props>
 
-const Template: Story<Props> = (args) => <Component {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Symbol = Template.bind({})
-Symbol.args = {
-  onClick: () => console.log('click'),
+export const Symbol: Story = {
+  args: {
+    onClick: () => console.log('click'),
+  },
 }

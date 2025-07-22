@@ -1,11 +1,11 @@
-import { getNetworkTypeByAddress } from './../Symbol/Config'
-import { getActiveAccountV2, setActiveAccountV2 } from './ActiveAccount'
+import { getNetworkTypeByAddress } from './../Symbol/Config.js'
+import { getActiveAccountV2, setActiveAccountV2 } from './ActiveAccount.js'
 import { NetworkType } from 'symbol-sdk'
-import { getStorage, setStorage } from '.'
+import { getStorage, setStorage } from './index.js'
 import {
   IExtensionAccount,
   ExtensionAccount,
-} from '../../model/ExtensionAccount'
+} from '../../model/ExtensionAccount.js'
 
 export const addExtensionAccount = (account: IExtensionAccount) => {
   return new Promise((resolve, reject) => {

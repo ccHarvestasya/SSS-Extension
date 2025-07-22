@@ -1,4 +1,4 @@
-import { getStorage, setStorage } from '.'
+import { getStorage, setStorage } from './index.js'
 
 export const getAllowList = (): Promise<string[]> => {
   return new Promise((resolve) => {

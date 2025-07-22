@@ -9,14 +9,14 @@ import {
   MosaicInfo,
   RepositoryFactoryHttp,
 } from 'symbol-sdk'
-import Typography from '../../../../_general/components/Typography'
+import Typography from '../../../../_general/components/Typography/index.js'
 import { Divider } from '@mui/material'
 
 import Avatar from 'boring-avatars'
-import Color, { UtilColors } from '../../../../_general/utils/Color'
+import Color, { UtilColors } from '../../../../_general/utils/Color.js'
 
 import { useRecoilState } from 'recoil'
-import { networkAtom } from '../../../../_general/utils/Atom'
+import { networkAtom } from '../../../../_general/utils/Atom.js'
 export type Props = {
   address: Address
 }
@@ -28,7 +28,7 @@ type MosaicData = {
   namespaces: string[]
 }
 
-const Component: React.VFC<Props> = ({ address }) => {
+const Component: React.FC<Props> = ({ address }) => {
   const [network] = useRecoilState(networkAtom)
 
   const NODE_URL = network
@@ -49,7 +49,7 @@ const Component: React.VFC<Props> = ({ address }) => {
           .subscribe((chainInfo) => {
             nsRep
               .getMosaicsNames(
-                accountInfo.mosaics.map((m) => new MosaicId(m.id.id.toHex()))
+                accountInfo.mosaics.map((m) => new MosaicId(m.id.id.toHex())),
               )
               .toPromise()
               .then((data) => {
@@ -87,14 +87,13 @@ const Component: React.VFC<Props> = ({ address }) => {
               })
           })
       },
-      (err) => console.error('acc', err)
+      (err) => console.error('acc', err),
     )
 
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       setCount((c) => c + 1)
     }, 5000)
-    return () => clearInterval(interval)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => window.clearInterval(interval)
   }, [network])
 
   const getText = (texts: string[]) => {

@@ -1,4 +1,4 @@
-import { getStorage, setStorage } from '.'
+import { getStorage, setStorage } from './index.js'
 
 export const getPopup = (): Promise<number> => {
   return new Promise((resolve) => {

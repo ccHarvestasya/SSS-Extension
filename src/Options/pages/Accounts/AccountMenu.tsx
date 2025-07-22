@@ -7,17 +7,17 @@ import {
   getAccountIndexByAddress,
   setActiveAccountV2,
   Setting,
-} from '../../../_general/lib/Storage'
+} from '../../../_general/lib/Storage/index.js'
 import { IconContext } from 'react-icons'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { useTranslation } from 'react-i18next'
-import { ExtensionAccount } from '../../../_general/model/ExtensionAccount'
-import Color from '../../../_general/utils/Color'
+import { ExtensionAccount } from '../../../_general/model/ExtensionAccount.js'
+import Color from '../../../_general/utils/Color.js'
 import {
   Snackbar,
   SnackbarProps,
   SnackbarType,
-} from '../../../_general/components/Snackbar'
+} from '../../../_general/components/Snackbar/index.js'
 
 export type Props = {
   account: ExtensionAccount
@@ -25,7 +25,7 @@ export type Props = {
   setting: Setting
 }
 
-const Component: React.VFC<Props> = ({ account, reload, setting }) => {
+const Component: React.FC<Props> = ({ account, reload, setting }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const [t] = useTranslation()

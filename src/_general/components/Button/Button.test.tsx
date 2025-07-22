@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import Button from '.'
+import Button from './index.js'
 
 const expected_label = 'EXPECTED'
 const unexpected_label = 'UN EXPECTED'

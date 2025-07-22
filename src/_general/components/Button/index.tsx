@@ -2,14 +2,14 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import { Button } from '@mui/material'
-import Color from '../../utils/Color'
+import Color from '../../utils/Color.js'
 
 export interface Props {
   text: string
   onClick: () => void
 }
 
-const Component: React.VFC<Props> = ({ text, onClick }) => {
+const Component: React.FC<Props> = ({ text, onClick }) => {
   return (
     <SButton variant="outlined" onClick={onClick}>
       {text}

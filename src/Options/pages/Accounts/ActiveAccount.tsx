@@ -1,29 +1,29 @@
 import React, { useState } from 'react'
 
 import styled from '@emotion/styled'
-import Typography from '../../../_general/components/Typography'
-import { ExtensionAccount } from '../../../_general/model/ExtensionAccount'
+import Typography from '../../../_general/components/Typography/index.js'
+import { ExtensionAccount } from '../../../_general/model/ExtensionAccount.js'
 import { IconButton, Modal, Paper } from '@mui/material'
 import { IconContext } from 'react-icons'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
-import { Setting } from '../../../_general/lib/Storage'
+import { Setting } from '../../../_general/lib/Storage/index.js'
 import { Account, NetworkType } from 'symbol-sdk'
-import { getNetworkTypeByAddress } from '../../../_general/lib/Symbol/Config'
-import Button from '../../../_general/components/Button'
-import { decriptPrivateKey } from '../../../_general/lib/Crypto/core'
-import PasswordTextField from '../../../_general/components/TextField/PasswordTextField'
+import { getNetworkTypeByAddress } from '../../../_general/lib/Symbol/Config.js'
+import Button from '../../../_general/components/Button/index.js'
+import { decryptPrivateKey } from '../../../_general/lib/Crypto/core.js'
+import PasswordTextField from '../../../_general/components/TextField/PasswordTextField.js'
 import { t } from 'i18next'
 import { IoMdClose } from 'react-icons/io'
 import Color, {
   MainNetColors,
   TestNetColors,
-} from '../../../_general/utils/Color'
+} from '../../../_general/utils/Color.js'
 import Avatar from 'boring-avatars'
 import {
   Snackbar,
   SnackbarProps,
   SnackbarType,
-} from '../../../_general/components/Snackbar'
+} from '../../../_general/components/Snackbar/index.js'
 
 export type Props = {
   activeAccount: ExtensionAccount
@@ -34,7 +34,7 @@ export type Props = {
 const asterisk =
   '****************************************************************'
 
-const Component: React.VFC<Props> = ({ activeAccount }) => {
+const Component: React.FC<Props> = ({ activeAccount }) => {
   const [open, setOpen] = useState(false)
   const [pass, setPass] = useState('')
   const [prikey, setPrikey] = useState(asterisk)
@@ -67,7 +67,7 @@ const Component: React.VFC<Props> = ({ activeAccount }) => {
 
   const showPrikey = () => {
     try {
-      const pk = decriptPrivateKey(activeAccount.encriptedPrivateKey, pass)
+      const pk = decryptPrivateKey(activeAccount.encriptedPrivateKey, pass)
       const acc = Account.createFromPrivateKey(
         pk,
         getNetworkTypeByAddress(activeAccount.address)
@@ -213,11 +213,15 @@ const Root = styled('div')({
   width: '800px',
 })
 
-const Flex = styled('div')((p: { isLast: boolean }) => ({
+interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
+  isLast: boolean
+}
+
+const Flex = styled('div')<FlexProps>(({ isLast }) => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
-  marginBottom: p.isLast ? '0px' : '4px',
+  marginBottom: isLast ? '0px' : '4px',
 }))
 
 const Name = styled('div')({

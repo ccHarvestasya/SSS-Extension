@@ -1,5 +1,5 @@
 import { NetworkType } from 'symbol-sdk'
-import { getStorage, setStorage } from '.'
+import { getStorage, setStorage } from './index.js'
 
 export type Setting = {
   lang: string

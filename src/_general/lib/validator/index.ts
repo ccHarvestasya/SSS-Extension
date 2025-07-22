@@ -1,6 +1,6 @@
 import { RefObject } from 'react'
 
-import { decrypt } from '../Crypto'
+import { decrypt } from '../Crypto/index.js'
 import { Account, NetworkType } from 'symbol-sdk'
 
 const ADDRESS_PATTERN = /[A-Z0-9]{39}/
@@ -18,7 +18,7 @@ export const validateRef = (
 export const validateAddress = (address: string): string => {
   if (
     address.trim().toUpperCase().replace(/-/g, '').length === 39 &&
-    ADDRESS_PATTERN.test(address)
+    ADDRESS_PATTERN.test(address.trim().toUpperCase().replace(/-/g, ''))
   ) {
     return address
   }
@@ -26,29 +26,25 @@ export const validateAddress = (address: string): string => {
 }
 
 export const validatePrivateKey = (priKey: string): string => {
-  if (priKey.length === 64 && PRIKEY_PATTERN.test(priKey)) {
+  if (priKey.length === 64 && PRIKEY_PATTERN.test(priKey.toUpperCase())) {
     return priKey
   }
   return ''
 }
 
 export const checkPassword = (
-  encriptedPrivateKey: string,
+  encryptedPrivateKey: string,
   pass: string,
   address: string,
 ): boolean => {
   try {
-    const priKey = decrypt(encriptedPrivateKey, pass)
-    const net_type =
+    const priKey = decrypt(encryptedPrivateKey, pass)
+    const netType =
       address.charAt(0) === 'T' ? NetworkType.TEST_NET : NetworkType.MAIN_NET
 
-    const addr = Account.createFromPrivateKey(priKey, net_type).address.plain()
+    const addr = Account.createFromPrivateKey(priKey, netType).address.plain()
 
-    if (addr === address) {
-      return true
-    } else {
-      return false
-    }
+    return addr === address
   } catch (e) {
     console.error(e)
     return false

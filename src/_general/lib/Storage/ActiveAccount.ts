@@ -1,8 +1,9 @@
-import { getExtensionAccounts } from './ExtensionAccount'
+import { getExtensionAccounts } from './ExtensionAccount.js'
 import { NetworkType } from 'symbol-sdk'
-import { getStorage, getExtensionAccount, setStorage } from '.'
-import { ExtensionAccount } from '../../model/ExtensionAccount'
-import { ActiveAccount } from '../../model/ActiveAccount'
+import { getStorage, setStorage } from './index.js'
+import { getExtensionAccount } from './ExtensionAccount.js'
+import { ExtensionAccount } from '../../model/ExtensionAccount.js'
+import { ActiveAccount } from '../../model/ActiveAccount.js'
 
 export const getActiveAccount = (): Promise<ExtensionAccount> => {
   return new Promise((resolve) => {

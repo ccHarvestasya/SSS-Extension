@@ -2,12 +2,12 @@ import React from 'react'
 
 import styled from '@emotion/styled'
 import { MosaicSupplyChangeTransaction } from 'symbol-sdk'
-import Typography from '../Typography'
+import Typography from '../Typography/index.js'
 
 type Props = {
   transaction: MosaicSupplyChangeTransaction
 }
-const MosaicSupplyChangeCard: React.VFC<Props> = ({ transaction }) => {
+const MosaicSupplyChangeCard: React.FC<Props> = ({ transaction }) => {
   return (
     <Wrapper>
       <Typography

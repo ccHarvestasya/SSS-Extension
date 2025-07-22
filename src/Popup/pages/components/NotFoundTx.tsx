@@ -1,9 +1,9 @@
 import React from 'react'
 
 import styled from '@emotion/styled'
-import Typography from '../../../_general/components/Typography'
+import Typography from '../../../_general/components/Typography/index.js'
 
-const Component: React.VFC = () => {
+const Component: React.FC = () => {
   return (
     <Wrapper>
       <Typography text="NOT FOUND" fontSize={28} />

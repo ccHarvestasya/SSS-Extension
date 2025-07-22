@@ -2,15 +2,15 @@ import React from 'react'
 
 import styled from '@emotion/styled'
 import { TransferTransaction } from 'symbol-sdk'
-import Typography from '../Typography'
-import Spacer from '../Spacer'
-import TxAddress from '../TransactionInfo/Address'
-import TxMosaic from '../TransactionInfo/Mosaic'
+import Typography from '../Typography/index.js'
+import Spacer from '../Spacer/index.js'
+import TxAddress from '../TransactionInfo/Address/index.js'
+import TxMosaic from '../TransactionInfo/Mosaic/index.js'
 
 type Props = {
   transaction: TransferTransaction
 }
-const TransferCard: React.VFC<Props> = ({ transaction }) => {
+const TransferCard: React.FC<Props> = ({ transaction }) => {
   return (
     <Wrapper>
       <TxAddress address={transaction.recipientAddress} />

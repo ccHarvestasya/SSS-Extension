@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react'
 
 import styled from '@emotion/styled'
-import Typography from '../../Typography'
+import Typography from '../../Typography/index.js'
 import {
   Mosaic,
   NamespaceId,
   NamespaceService,
   RepositoryFactoryHttp,
 } from 'symbol-sdk'
-import { getActiveAccountV2, getSetting } from '../../../lib/Storage'
 
-import { networkAtom } from '../../../../_general/utils/Atom'
+import { networkAtom } from '../../../../_general/utils/Atom.js'
 import { useRecoilState } from 'recoil'
+import { getSetting } from '../../../lib/Storage/Setting.js'
+import { getActiveAccountV2 } from '../../../lib/Storage/ActiveAccount.js'
 
 export type Props = {
   mosaic: Mosaic
 }
 
-const TxMosaic: React.VFC<Props> = ({ mosaic }) => {
+const TxMosaic: React.FC<Props> = ({ mosaic }) => {
   const [id, setId] = useState('')
   const [div, setDiv] = useState(0)
 
@@ -25,7 +26,7 @@ const TxMosaic: React.VFC<Props> = ({ mosaic }) => {
 
   useEffect(() => {
     getSetting().then((s) => {
-      getActiveAccountV2(s.networkType).then(async (extensionAccount) => {
+      getActiveAccountV2(s.networkType).then(async () => {
         const rep = new RepositoryFactoryHttp(network)
         const nsRep = rep.createNamespaceRepository()
         const nsService = new NamespaceService(nsRep)
@@ -41,13 +42,13 @@ const TxMosaic: React.VFC<Props> = ({ mosaic }) => {
                     console.log('mosaicInfo', mosaicInfo)
                     setDiv(mosaicInfo.divisibility)
                   },
-                  (err) => console.error('transaction info', err)
+                  (err) => console.error('transaction info', err),
                 )
               }
             },
             (err) => {
               setId('NameSpace Not Found')
-            }
+            },
           )
         } else {
           setId(mosaic.id.toHex())
@@ -65,7 +66,7 @@ const TxMosaic: React.VFC<Props> = ({ mosaic }) => {
             (mosaicInfo) => {
               setDiv(mosaicInfo.divisibility)
             },
-            (err) => console.error('mosaic info div', err)
+            (err) => console.error('mosaic info div', err),
           )
         }
       })

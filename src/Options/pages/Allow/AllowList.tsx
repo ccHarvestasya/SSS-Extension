@@ -2,30 +2,30 @@ import React, { useState } from 'react'
 
 import styled from '@emotion/styled'
 
-import Typography from '../../../_general/components/Typography'
+import Typography from '../../../_general/components/Typography/index.js'
 
 import { IconButton } from '@mui/material'
 import { IconContext } from 'react-icons'
 import { RiAddFill } from 'react-icons/ri'
 import { BsClipboardCheck, BsXSquare } from 'react-icons/bs'
-import { addAllowList, deleteAllowList } from '../../../_general/lib/Storage'
+import { addAllowList, deleteAllowList } from '../../../_general/lib/Storage/index.js'
 
-import Spacer from '../../../_general/components/Spacer'
+import Spacer from '../../../_general/components/Spacer/index.js'
 
 import { useTranslation } from 'react-i18next'
-import TextField from '../../../_general/components/TextField'
-import Color from '../../../_general/utils/Color'
+import TextField from '../../../_general/components/TextField/index.js'
+import Color from '../../../_general/utils/Color.js'
 import {
   Snackbar,
   SnackbarProps,
   SnackbarType,
-} from '../../../_general/components/Snackbar'
+} from '../../../_general/components/Snackbar/index.js'
 export type Props = {
   allowlist: string[]
   reload: () => void
 }
 
-const Component: React.VFC<Props> = ({ allowlist, reload }) => {
+const Component: React.FC<Props> = ({ allowlist, reload }) => {
   const [t] = useTranslation()
   const [domainName, setDomainName] = useState('')
 

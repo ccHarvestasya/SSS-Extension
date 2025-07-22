@@ -1,20 +1,21 @@
-import { SECRET_KEY } from './../../utils/Config'
+import { SECRET_KEY } from '../../utils/Config.js'
 import CryptoJS from 'crypto-js'
 import crypto from 'crypto'
 
 const algorithm = 'aes-256-cbc'
 const delimiter = '$'
 
-const getKey = () => {
+const getKey = (): string => {
   const key = SECRET_KEY || ''
   return key
 }
-const getSeed = () => {
+
+const getSeed = (): string => {
   const key = getKey()
   return Buffer.from(key).toString('base64').substring(0, 32)
 }
 
-const encrypting = (value: string, iv: Buffer) => {
+const encrypting = (value: string, iv: Buffer): string => {
   const seed = getSeed()
   const cipher = crypto.createCipheriv(algorithm, seed, iv)
   const encrypted =
@@ -22,18 +23,18 @@ const encrypting = (value: string, iv: Buffer) => {
   return encrypted
 }
 
-export const getEncriptedPrivateKey = (
+export const getEncryptedPrivateKey = (
   value: string,
   iv: Buffer,
   password: string,
-) => {
+): string => {
   const k = encrypting(value, iv)
   const ivWithEncrypted = iv.toString('base64') + delimiter + k
 
   return CryptoJS.AES.encrypt(ivWithEncrypted, password).toString()
 }
 
-const decrypting = (value: string, iv: string) => {
+const decrypting = (value: string, iv: string): string => {
   const seed = getSeed()
   const decipher = crypto.createDecipheriv(
     algorithm,
@@ -45,7 +46,10 @@ const decrypting = (value: string, iv: string) => {
   return decrypted
 }
 
-export const decriptPrivateKey = (encryptedValue: string, password: string) => {
+export const decryptPrivateKey = (
+  encryptedValue: string,
+  password: string,
+): string => {
   const tmp = CryptoJS.AES.decrypt(encryptedValue, password).toString(
     CryptoJS.enc.Utf8,
   )

@@ -1,5 +1,5 @@
-import { getStorage, setStorage } from '.'
-import { Data, ENCRYPTED_MESSAGE, MESSAGE, TRANSACTION } from '../../model/Data'
+import { getStorage, setStorage } from './index.js'
+import { Data, ENCRYPTED_MESSAGE, MESSAGE, TRANSACTION } from '../../model/Data.js'
 
 export const getData = (): Promise<Data> => {
   return new Promise((resolve) => {

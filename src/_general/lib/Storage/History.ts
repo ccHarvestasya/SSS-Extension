@@ -1,5 +1,5 @@
 import { SignedTransaction } from 'symbol-sdk'
-import { getStorage, setStorage } from '.'
+import { getStorage, setStorage } from './index.js'
 
 export const getHistory = (): Promise<SignedTransaction[]> => {
   return new Promise((resolve) => {

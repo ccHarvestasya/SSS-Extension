@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-import Spacer from '../../../_general/components/Spacer'
+import Spacer from '../../../_general/components/Spacer/index.js'
 
-import { getActiveAccountV2, Setting } from '../../../_general/lib/Storage'
-import { ExtensionAccount } from '../../../_general/model/ExtensionAccount'
-import Mosaics from './Mosaics'
+import { getActiveAccountV2, Setting } from '../../../_general/lib/Storage/index.js'
+import { ExtensionAccount } from '../../../_general/model/ExtensionAccount.js'
+import Mosaics from './Mosaics/index.js'
 import { Address, NetworkType } from 'symbol-sdk'
-import ActiveAccount from './ActiveAccount'
+import ActiveAccount from './ActiveAccount/index.js'
 
 interface Props {
   reload: () => void
@@ -15,7 +15,7 @@ interface Props {
   setting: Setting
 }
 
-const Options: React.VFC<Props> = ({ reload, update, setting }) => {
+const Options: React.FC<Props> = ({ update, setting }) => {
   const [account, setAccount] = useState<ExtensionAccount | null>(null)
 
   useEffect(() => {

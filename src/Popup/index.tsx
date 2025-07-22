@@ -16,19 +16,19 @@ import {
   getSetting,
   getSignStatus,
   Setting,
-} from '../_general/lib/Storage'
+} from '../_general/lib/Storage/index.js'
 
-import { ExtensionAccount } from '../_general/model/ExtensionAccount'
+import { ExtensionAccount } from '../_general/model/ExtensionAccount.js'
 
-import Login from './pages/Login'
-import Main from './pages/Main'
+import Login from './pages/Login.js'
+import Main from './pages/Main.js'
 
 import {
   encription,
   signCosignatureTransaction,
   sign,
   signWithCosignatories,
-} from '../_general/lib/Sign'
+} from '../_general/lib/Sign/index.js'
 import {
   REMOVE_DATA,
   REQUEST_ACTIVE_ACCOUNT_TOKEN,
@@ -36,25 +36,25 @@ import {
   REQUEST_SIGN_COSIGNATURE,
   REQUEST_SIGN_WITH_COSIGNATORIES,
   SIGN_MESSAGE_DECRYPT,
-} from '../_general/model/MessageType'
+} from '../_general/model/MessageType.js'
 import { useRecoilState } from 'recoil'
-import { networkAtom } from '../_general/utils/Atom'
+import { networkAtom } from '../_general/utils/Atom.js'
 import { getActiveNode } from 'symbol-node-util'
 
-import { EncriptionMessage } from '../_general/model/EncriptionMessage'
+import { EncriptionMessage } from '../_general/model/EncriptionMessage.js'
 
 const LOGIN = 'LOGIN'
 const MAIN = 'MAIN'
 
 type PopupStatus = 'LOGIN' | 'MAIN'
 
-const Popup: React.VFC = () => {
+const Popup: React.FC = () => {
   const [extensionAccount, setExtensionAccount] =
     useState<ExtensionAccount | null>(null)
   const [status, setStatus] = useState<PopupStatus>(LOGIN)
   const [signStatus, setSignStatus] = useState<string>('')
   const [update, setUpdate] = useState(new Date())
-  const [pageSetting, setPageSetting] = useState<Setting>({} as Setting)
+  const [, setPageSetting] = useState<Setting>({} as Setting)
 
   const [_, setNetwork] = useRecoilState(networkAtom)
 
@@ -107,10 +107,10 @@ const Popup: React.VFC = () => {
       const acc = Account.createFromPrivateKey(priKey, net_type)
       const recipient = PublicAccount.createFromPublicKey(pubkey, net_type)
 
-      const encryptedMessage = !!msg.encryptedMessage
+      const encryptedMessage = msg.encryptedMessage
         ? acc.decryptMessage(
             new EncryptedMessage(msg.encryptedMessage),
-            recipient
+            recipient,
           ).payload
         : undefined
       msg.encryptedMessage = encryptedMessage
@@ -121,7 +121,7 @@ const Popup: React.VFC = () => {
   }
   const decriptMessage = (
     encriptionMessage: EncriptionMessage,
-    pubkey: string
+    pubkey: string,
   ) => {
     if (extensionAccount === null) {
       return
@@ -138,7 +138,7 @@ const Popup: React.VFC = () => {
 
     const msg = acc.decryptMessage(
       new EncryptedMessage(encriptionMessage.message, pubAcc),
-      pubAcc
+      pubAcc,
     )
 
     console.log(msg)
@@ -162,19 +162,19 @@ const Popup: React.VFC = () => {
       signCosignatureTransaction(
         transaction.serialize(),
         extensionAccount,
-        pass
+        pass,
       )
     }
     if (signStatus === REQUEST_SIGN_WITH_COSIGNATORIES) {
       getCosignatories().then((accounts) => {
         const accs = accounts.map((acc) =>
-          Account.createFromPrivateKey(acc, net_type)
+          Account.createFromPrivateKey(acc, net_type),
         )
         signWithCosignatories(
           transaction as AggregateTransaction,
           accs,
           extensionAccount,
-          pass
+          pass,
         )
       })
     }

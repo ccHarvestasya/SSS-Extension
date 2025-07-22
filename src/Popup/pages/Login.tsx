@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-import { ExtensionAccount } from '../../_general/model/ExtensionAccount'
-import Typography from '../../_general/components/Typography'
+import { ExtensionAccount } from '../../_general/model/ExtensionAccount.js'
+import Typography from '../../_general/components/Typography/index.js'
 import { Address } from 'symbol-sdk'
-import Spacer from '../../_general/components/Spacer'
-import Button from '../../_general/components/Button'
-import { checkPassword } from '../../_general/lib/validator'
-import PasswordTextField from '../../_general/components/TextField/PasswordTextField'
+import Spacer from '../../_general/components/Spacer/index.js'
+import Button from '../../_general/components/Button/index.js'
+import { checkPassword } from '../../_general/lib/validator/index.js'
+import PasswordTextField from '../../_general/components/TextField/PasswordTextField.js'
 import { useTranslation } from 'react-i18next'
 import TransportWebHID from '@ledgerhq/hw-transport-webhid'
 import { SymbolLedger, LedgerNetworkType } from 'symbol-ledger-typescript'
-import { Snackbar, SnackbarType } from '../../_general/components/Snackbar'
+import { Snackbar, SnackbarType } from '../../_general/components/Snackbar/index.js'
 import {
   checkLoginSession,
   getSession,
   resetLocalSession,
-} from '../../_general/lib/Storage'
-import { decrypt, encrypt } from '../../_general/lib/Crypto'
+} from '../../_general/lib/Storage/index.js'
+import { decrypt, encrypt } from '../../_general/lib/Crypto/index.js'
 
 export interface Props {
   extensionAccount: ExtensionAccount
   loginSuccess: (pass: string) => void
 }
 
-const Login: React.VFC<Props> = ({ extensionAccount, loginSuccess }) => {
+const Login: React.FC<Props> = ({ extensionAccount, loginSuccess }) => {
   const [pass, setPass] = useState('')
   const [open, setOpen] = useState(false)
   const [session, setSession] = useState(0)
@@ -95,7 +95,7 @@ const Login: React.VFC<Props> = ({ extensionAccount, loginSuccess }) => {
   }
 
   const connectHardwareWallet = () => {
-    TransportWebHID.create(100, 100).then(async (transport) => {
+    TransportWebHID.default.create(100, 100).then(async (transport) => {
       const ledger = new SymbolLedger(transport, 'XYM')
       try {
         const ledgerNetworkType = LedgerNetworkType.MAIN_NET

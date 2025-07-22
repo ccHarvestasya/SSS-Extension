@@ -13,22 +13,22 @@ import {
   TransactionType,
   TransferTransaction,
 } from 'symbol-sdk'
-import Typography from '../../../_general/components/Typography'
+import Typography from '../../../_general/components/Typography/index.js'
 
-import TransferCard from '../../../_general/components/Transactions/TransferCard'
-import AggregateComplateTransactionCard from '../../../_general/components/Transactions/AggregatTransactionCard'
-import AccountMetadataCard from '../../../_general/components/Transactions/AccountMetadataCard'
-import MosaicMetadataCard from '../../../_general/components/Transactions/MosaicMetadataCard'
-import NamespaceMetadataCard from '../../../_general/components/Transactions/NamespaceMetadataCard'
-import MosaicDefinitionCard from '../../../_general/components/Transactions/MosaicDefinitionCard'
-import MosaicSupplyChangeCard from '../../../_general/components/Transactions/MosaicSupplyChangeCard'
-import MosaicRevocationCard from '../../../_general/components/Transactions/MosaicRevocationCard'
+import TransferCard from '../../../_general/components/Transactions/TransferCard.js'
+import AggregateComplateTransactionCard from '../../../_general/components/Transactions/AggregatTransactionCard.js'
+import AccountMetadataCard from '../../../_general/components/Transactions/AccountMetadataCard.js'
+import MosaicMetadataCard from '../../../_general/components/Transactions/MosaicMetadataCard.js'
+import NamespaceMetadataCard from '../../../_general/components/Transactions/NamespaceMetadataCard.js'
+import MosaicDefinitionCard from '../../../_general/components/Transactions/MosaicDefinitionCard.js'
+import MosaicSupplyChangeCard from '../../../_general/components/Transactions/MosaicSupplyChangeCard.js'
+import MosaicRevocationCard from '../../../_general/components/Transactions/MosaicRevocationCard.js'
 
 export type Props = {
   transaction: Transaction
 }
 
-const TransactionCard: React.VFC<Props> = ({ transaction }) => {
+const TransactionCard: React.FC<Props> = ({ transaction }) => {
   if (transaction.type === TransactionType.TRANSFER) {
     return <TransferCard transaction={transaction as TransferTransaction} />
   }

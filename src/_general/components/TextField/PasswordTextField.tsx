@@ -14,11 +14,10 @@ interface Props {
   setPass: Dispatch<string>
 }
 
-const PasswordTextField: React.VFC<Props> = ({
+const PasswordTextField: React.FC<Props> = ({
   label,
   autoFocus = false,
   setPass,
-  ...props
 }) => {
   const [isVisible, setIsVisible] = useState(false)
 

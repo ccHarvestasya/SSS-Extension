@@ -1,15 +1,14 @@
 import React from 'react'
-
 import styled from '@emotion/styled'
-import Typography from '../../../_general/components/Typography'
+import Typography from '../../../_general/components/Typography/index.js'
 import { Divider } from '@mui/material'
-import Color from '../../../_general/utils/Color'
+import Color from '../../../_general/utils/Color.js'
 
 export type Props = {
   message: string
 }
 
-const Component: React.VFC<Props> = ({ message }) => {
+const Component: React.FC<Props> = ({ message }) => {
   return (
     <Wrapper>
       <Header>

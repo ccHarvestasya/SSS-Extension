@@ -1,14 +1,14 @@
 import React from 'react'
 
 import styled from '@emotion/styled'
-import Typography from '../../Typography'
+import Typography from '../../Typography/index.js'
 import { Message } from 'symbol-sdk'
 
 export type Props = {
   message: Message
 }
 
-const TxMessage: React.VFC<Props> = ({ message }) => {
+const TxMessage: React.FC<Props> = ({ message }) => {
   return (
     <Wrapper>
       <Typography text="Message" fontSize={24} />

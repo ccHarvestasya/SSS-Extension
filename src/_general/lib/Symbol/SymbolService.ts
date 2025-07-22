@@ -1,4 +1,4 @@
-import { getEpoch, getNetworkTypeByAddress, getXymId } from './Config'
+import { getEpoch, getNetworkTypeByAddress, getXymId } from './Config.js'
 import {
   Address,
   Mosaic,

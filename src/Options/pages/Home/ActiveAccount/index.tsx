@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
-import Typography from '../../../../_general/components/Typography'
+import Typography from '../../../../_general/components/Typography/index.js'
 import { Address, NetworkType } from 'symbol-sdk'
 
-import { getAddressXym } from '../../../../_general/lib/Symbol/SymbolService'
+import { getAddressXym } from '../../../../_general/lib/Symbol/SymbolService.js'
 import Color, {
   MainNetColors,
   TestNetColors,
-} from '../../../../_general/utils/Color'
+} from '../../../../_general/utils/Color.js'
 
-import { getNetworkTypeByAddress } from '../../../../_general/lib/Symbol/Config'
+import { getNetworkTypeByAddress } from '../../../../_general/lib/Symbol/Config.js'
 import Avatar from 'boring-avatars'
 
 import { useRecoilState } from 'recoil'
-import { networkAtom } from '../../../../_general/utils/Atom'
+import { networkAtom } from '../../../../_general/utils/Atom.js'
 
 export type Props = {
   address: Address
   name: string
 }
 
-const Component: React.VFC<Props> = ({ address, name }) => {
+const Component: React.FC<Props> = ({ address, name }) => {
   const [amount, setAmount] = useState(['0', '0'])
 
   const [network] = useRecoilState(networkAtom)

@@ -1,20 +1,33 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
+import { RecoilRoot } from 'recoil'
 
-import ActiveAccount, { Props } from '.'
+import ActiveAccount, { Props } from './index.js'
 import { Address } from 'symbol-sdk'
 
-export default {
+const meta: Meta<Props> = {
   title: 'Option/ActiveAccount',
   component: ActiveAccount,
-} as Meta
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <RecoilRoot>
+        <Story />
+      </RecoilRoot>
+    ),
+  ],
+} satisfies Meta<Props>
 
-const Template: Story<Props> = (args) => <ActiveAccount {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Main = Template.bind({})
-Main.args = {
-  address: Address.createFromRawAddress(
-    'NAW7L44MVKCVBM6IGEBXLF2K7JYKEP6R5XMCEZA'
-  ),
-  name: 'inatatsu test wallet',
+export const Main: Story = {
+  args: {
+    address: Address.createFromRawAddress(
+      'NAW7L44MVKCVBM6IGEBXLF2K7JYKEP6R5XMCEZA',
+    ),
+    name: 'inatatsu test wallet',
+  },
 }

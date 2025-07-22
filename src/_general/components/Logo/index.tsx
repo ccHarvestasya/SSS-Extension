@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from '@emotion/styled'
 
 import SVG from './logo.svg?react'
@@ -7,7 +8,7 @@ export interface Props {
   onClick: () => void
 }
 
-const Component: React.VFC<Props> = ({ onClick }) => {
+const Component: React.FC<Props> = ({ onClick }) => {
   return (
     <Wrapper onClick={onClick}>
       <SVG />
@@ -17,7 +18,7 @@ const Component: React.VFC<Props> = ({ onClick }) => {
 
 export default Component
 
-export const SquareLogo: React.VFC<Props> = ({ onClick }) => {
+export const SquareLogo: React.FC<Props> = ({ onClick }) => {
   return (
     <SWrapper onClick={onClick}>
       <SSVG />

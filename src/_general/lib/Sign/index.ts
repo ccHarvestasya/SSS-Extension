@@ -5,9 +5,9 @@ import {
   CosignatureTransaction,
   PublicAccount,
 } from 'symbol-sdk'
-import { addHistory } from '../Storage'
-import { SIGN_MESSAGE, SIGN_TRANSACTION } from '../../model/MessageType'
-import { ExtensionAccount } from '../../model/ExtensionAccount'
+import { addHistory } from '../Storage/History.js'
+import { SIGN_MESSAGE, SIGN_TRANSACTION } from '../../model/MessageType.js'
+import { ExtensionAccount } from '../../model/ExtensionAccount.js'
 
 export const encription = (
   message: string,

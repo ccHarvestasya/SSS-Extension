@@ -1,16 +1,49 @@
-import React from 'react'
-import { Story, Meta } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
+import { useState } from 'react'
 
-import Component, { Props } from './index'
+import Component, { Props } from './index.js'
 
-export default {
+const meta: Meta<Props> = {
   title: 'Elements/TextField',
   component: Component,
-} as Meta
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<Props>
 
-const Template: Story<Props> = (args) => <Component {...args} />
+export default meta
+type Story = StoryObj<Props>
 
-export const Default = Template.bind({})
-Default.args = {
-  label: 'TextField',
+export const Default: Story = {
+  render: (args) => {
+    const [, setText] = useState('')
+    return <Component {...args} setText={setText} />
+  },
+  args: {
+    label: 'TextField',
+    variant: 'outlined',
+  },
+}
+
+export const Filled: Story = {
+  render: (args) => {
+    const [, setText] = useState('')
+    return <Component {...args} setText={setText} />
+  },
+  args: {
+    label: 'TextField',
+    variant: 'filled',
+  },
+}
+
+export const Text: Story = {
+  render: (args) => {
+    const [, setText] = useState('')
+    return <Component {...args} setText={setText} />
+  },
+  args: {
+    label: 'TextField',
+    variant: 'text',
+  },
 }

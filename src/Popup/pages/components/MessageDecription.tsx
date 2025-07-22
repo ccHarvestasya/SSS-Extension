@@ -1,11 +1,8 @@
 import React from 'react'
-
 import styled from '@emotion/styled'
-import Typography from '../../../_general/components/Typography'
-import { Divider } from '@mui/material'
-import Color from '../../../_general/utils/Color'
+import Typography from '../../../_general/components/Typography/index.js'
 
-const Component: React.VFC = () => {
+const Component: React.FC = () => {
   return (
     <Content>
       <Typography text="MessageDecryption" fontSize={32} />

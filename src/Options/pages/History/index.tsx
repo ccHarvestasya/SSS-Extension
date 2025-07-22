@@ -2,16 +2,16 @@ import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import { Address } from 'symbol-sdk'
 
-import { getActiveAccountV2, Setting } from '../../../_general/lib/Storage'
-import { ExtensionAccount } from '../../../_general/model/ExtensionAccount'
-import TransactionHistory from './TransactionHistory'
+import { getActiveAccountV2, Setting } from '../../../_general/lib/Storage/index.js'
+import { ExtensionAccount } from '../../../_general/model/ExtensionAccount.js'
+import TransactionHistory from './TransactionHistory/index.js'
 interface Props {
   reload: () => void
   update: Date
   setting: Setting
 }
 
-const Options: React.VFC<Props> = ({ reload, update, setting }) => {
+const Options: React.FC<Props> = ({ setting }) => {
   const [activeAccount, setActiveAccount] =
     useState<ExtensionAccount | null>(null)
   useEffect(() => {
