@@ -37,11 +37,11 @@ import {
   REQUEST_SIGN_WITH_COSIGNATORIES,
   SIGN_MESSAGE_DECRYPT,
 } from '../_general/model/MessageType.js'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { networkAtom } from '../_general/utils/Atom.js'
 import { getActiveNode } from 'symbol-node-util'
 
-import { EncriptionMessage } from '../_general/model/EncriptionMessage.js'
+import { EncryptionMessage } from '../_general/model/EncriptionMessage.js'
 
 const LOGIN = 'LOGIN'
 const MAIN = 'MAIN'
@@ -56,7 +56,7 @@ const Popup: React.FC = () => {
   const [update, setUpdate] = useState(new Date())
   const [, setPageSetting] = useState<Setting>({} as Setting)
 
-  const [_, setNetwork] = useRecoilState(networkAtom)
+  const [, setNetwork] = useAtom(networkAtom)
 
   window.onbeforeunload = () => {
     chrome.runtime.sendMessage({
@@ -120,7 +120,7 @@ const Popup: React.FC = () => {
     }
   }
   const decriptMessage = (
-    encriptionMessage: EncriptionMessage,
+    encriptionMessage: EncryptionMessage,
     pubkey: string,
   ) => {
     if (extensionAccount === null) {

@@ -1,5 +1,5 @@
 import { StoryFn, Meta } from '@storybook/react-vite'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'jotai'
 
 import Mosaics, { Props } from './index.js'
 import { Address } from 'symbol-sdk'
@@ -9,9 +9,9 @@ export default {
   component: Mosaics,
   decorators: [
     (Story) => (
-      <RecoilRoot>
+      <Provider>
         <Story />
-      </RecoilRoot>
+      </Provider>
     ),
   ],
 } as Meta

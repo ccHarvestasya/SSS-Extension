@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'jotai'
 import Component, { Props } from './index.js'
 import { Address } from 'symbol-sdk'
 
@@ -12,9 +12,9 @@ const meta: Meta<Props> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <RecoilRoot>
+      <Provider>
         <Story />
-      </RecoilRoot>
+      </Provider>
     ),
   ],
 } satisfies Meta<Props>

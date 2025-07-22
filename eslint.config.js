@@ -18,6 +18,8 @@ export default [
         Buffer: 'readonly',
         chrome: 'readonly',
         localStorage: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
       },
     },
     plugins: {

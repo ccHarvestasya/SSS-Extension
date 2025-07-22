@@ -26,7 +26,7 @@ import {
 import Footer from './components/Footer/index.js'
 import { getExtensionAccounts } from '../_general/lib/Storage/index.js'
 
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 
 import { networkAtom } from '../_general/utils/Atom.js'
 
@@ -62,8 +62,7 @@ const Options: React.FC = () => {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setNetwork] = useRecoilState(networkAtom)
+  const [, setNetwork] = useAtom(networkAtom)
 
   useEffect(() => {
     getSetting().then((s) => {
@@ -85,7 +84,6 @@ const Options: React.FC = () => {
     if (!checkLoginSession()) {
       resetLocalSession()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import {
 } from 'symbol-sdk'
 
 import { networkAtom } from '../../../../_general/utils/Atom.js'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { getSetting } from '../../../lib/Storage/Setting.js'
 import { getActiveAccountV2 } from '../../../lib/Storage/ActiveAccount.js'
 
@@ -22,56 +22,60 @@ const TxMosaic: React.FC<Props> = ({ mosaic }) => {
   const [id, setId] = useState('')
   const [div, setDiv] = useState(0)
 
-  const [network] = useRecoilState(networkAtom)
+  const [network] = useAtom(networkAtom)
 
   useEffect(() => {
+    if (!network) return;
     getSetting().then((s) => {
       getActiveAccountV2(s.networkType).then(async () => {
-        const rep = new RepositoryFactoryHttp(network)
-        const nsRep = rep.createNamespaceRepository()
-        const nsService = new NamespaceService(nsRep)
-        const mosaicHttp = rep.createMosaicRepository()
-        if (mosaic.id instanceof NamespaceId) {
-          const nsId = NamespaceId.createFromEncoded(mosaic.id.toHex())
-          nsService.namespace(nsId).subscribe(
-            (x) => {
-              setId(x.name)
-              if (x.alias.mosaicId) {
-                mosaicHttp.getMosaic(x.alias.mosaicId).subscribe(
-                  (mosaicInfo) => {
-                    console.log('mosaicInfo', mosaicInfo)
-                    setDiv(mosaicInfo.divisibility)
-                  },
-                  (err) => console.error('transaction info', err),
-                )
+        try {
+          const rep = new RepositoryFactoryHttp(network)
+          const nsRep = rep.createNamespaceRepository()
+          const nsService = new NamespaceService(nsRep)
+          const mosaicHttp = rep.createMosaicRepository()
+          if (mosaic.id instanceof NamespaceId) {
+            const nsId = NamespaceId.createFromEncoded(mosaic.id.toHex())
+            nsService.namespace(nsId).subscribe(
+              (x) => {
+                setId(x.name)
+                if (x.alias.mosaicId) {
+                  mosaicHttp.getMosaic(x.alias.mosaicId).subscribe(
+                    (mosaicInfo) => {
+                      setDiv(mosaicInfo.divisibility)
+                    },
+                    () => {}
+                  )
+                }
+              },
+              () => {
+                setId('NameSpace Not Found')
               }
-            },
-            (err) => {
-              setId('NameSpace Not Found')
-            },
-          )
-        } else {
-          setId(mosaic.id.toHex())
-          nsRep
-            .getMosaicsNames([mosaic.id])
-            .toPromise()
-            .then((ms) => {
-              if (!ms) return
-              const m = ms[0]
-              if (m.names.length !== 0) {
-                setId(m.names[0].name)
-              }
-            })
-          mosaicHttp.getMosaic(mosaic.id).subscribe(
-            (mosaicInfo) => {
-              setDiv(mosaicInfo.divisibility)
-            },
-            (err) => console.error('mosaic info div', err),
-          )
+            )
+          } else {
+            setId(mosaic.id.toHex())
+            nsRep
+              .getMosaicsNames([mosaic.id])
+              .toPromise()
+              .then((ms) => {
+                if (!ms) return
+                const m = ms[0]
+                if (m.names.length !== 0) {
+                  setId(m.names[0].name)
+                }
+              })
+            mosaicHttp.getMosaic(mosaic.id).subscribe(
+              (mosaicInfo) => {
+                setDiv(mosaicInfo.divisibility)
+              },
+              () => {}
+            )
+          }
+        } catch {
+          setId('Invalid Network URL')
         }
       })
     })
-  }, [mosaic])
+  }, [mosaic, network])
 
   return (
     <Wrapper>

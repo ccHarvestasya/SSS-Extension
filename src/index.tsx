@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom/client'
 import Popup from './Popup/index.js'
 import Options from './Options/index.js'
 import reportWebVitals from './reportWebVitals.js'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'jotai'
 import './style.css'
 
 if (process.env.REACT_APP_TARGET === 'popup') {
   const container = document.getElementById('root') || document.createElement('div');
   ReactDOM.createRoot(container).render(
     <React.StrictMode>
-      <RecoilRoot>
+      <Provider>
         <Popup />
-      </RecoilRoot>
+      </Provider>
     </React.StrictMode>
   );
 }
@@ -21,9 +21,9 @@ if (process.env.REACT_APP_TARGET === 'options') {
   const container = document.getElementById('root') || document.createElement('div');
   ReactDOM.createRoot(container).render(
     <React.StrictMode>
-      <RecoilRoot>
+      <Provider>
         <Options />
-      </RecoilRoot>
+      </Provider>
     </React.StrictMode>
   );
 }

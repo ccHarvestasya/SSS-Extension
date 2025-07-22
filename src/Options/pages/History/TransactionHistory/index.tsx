@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { IconContext } from 'react-icons'
 import { MdArrowRight, MdArrowLeft } from 'react-icons/md'
 
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { networkAtom } from '../../../../_general/utils/Atom.js'
 
 export type Props = {
@@ -23,7 +23,7 @@ export type Props = {
 
 const Component: React.FC<Props> = ({ address }) => {
   const [t] = useTranslation()
-  const [network] = useRecoilState(networkAtom)
+  const [network] = useAtom(networkAtom)
 
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLastPage, setIsLastPage] = useState(false)

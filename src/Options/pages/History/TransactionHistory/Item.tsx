@@ -7,7 +7,7 @@ import Color, { UtilColors } from '../../../../_general/utils/Color.js'
 import { Link } from '@mui/material'
 import Avatar from 'boring-avatars'
 
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { networkAtom } from '../../../../_general/utils/Atom.js'
 
 export type Props = {
@@ -19,7 +19,7 @@ export type Props = {
 
 const Component: React.FC<Props> = ({ type, hash, netType, height }) => {
   const [time, setTime] = useState<string>('')
-  const [network] = useRecoilState(networkAtom)
+  const [network] = useAtom(networkAtom)
 
   useEffect(() => {
     getTimeStamp(height, netType, network).then((t) => {

@@ -15,7 +15,7 @@ import { Divider } from '@mui/material'
 import Avatar from 'boring-avatars'
 import Color, { UtilColors } from '../../../../_general/utils/Color.js'
 
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { networkAtom } from '../../../../_general/utils/Atom.js'
 export type Props = {
   address: Address
@@ -29,7 +29,7 @@ type MosaicData = {
 }
 
 const Component: React.FC<Props> = ({ address }) => {
-  const [network] = useRecoilState(networkAtom)
+  const [network] = useAtom(networkAtom)
 
   const NODE_URL = network
 

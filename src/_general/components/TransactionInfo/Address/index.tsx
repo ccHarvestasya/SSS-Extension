@@ -9,7 +9,7 @@ import {
   UnresolvedAddress,
 } from 'symbol-sdk'
 
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { networkAtom } from '../../../utils/Atom.js'
 
 export type Props = {
@@ -17,29 +17,35 @@ export type Props = {
 }
 
 const TxAddress: React.FC<Props> = ({ address }) => {
-  const [network] = useRecoilState(networkAtom)
+  const [network] = useAtom(networkAtom)
   const [addr, setAddr] = useState('')
   useEffect(() => {
     if (address instanceof NamespaceId) {
       const url = network
-      console.log({ network })
-      const rep = new RepositoryFactoryHttp(url)
-      const nsRep = rep.createNamespaceRepository()
-      const nsService = new NamespaceService(nsRep)
-
-      const nsId = NamespaceId.createFromEncoded(address.toHex())
-      nsService.namespace(nsId).subscribe(
-        (x) => {
-          setAddr(x.name)
-        },
-        (err) => {
-          setAddr('NameSpace Not Found')
-        }
-      )
+      if (!url) {
+        setAddr('Network URL Not Set')
+        return
+      }
+      try {
+        const rep = new RepositoryFactoryHttp(url)
+        const nsRep = rep.createNamespaceRepository()
+        const nsService = new NamespaceService(nsRep)
+        const nsId = NamespaceId.createFromEncoded(address.toHex())
+        nsService.namespace(nsId).subscribe(
+          (x) => {
+            setAddr(x.name)
+          },
+          () => {
+            setAddr('NameSpace Not Found')
+          }
+        )
+      } catch {
+        setAddr('Invalid Network URL')
+      }
     } else {
       setAddr(address.plain())
     }
-  }, [address])
+  }, [address, network])
   return (
     <Wrapper>
       <Typography
