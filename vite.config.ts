@@ -1,15 +1,19 @@
-import { defineConfig } from 'vite'
-import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
+import {dirname, resolve} from 'path'
+import {fileURLToPath} from 'url'
+import {defineConfig} from 'vite'
+import {nodePolyfills} from 'vite-plugin-node-polyfills'
 import svgr from 'vite-plugin-svgr'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 export default defineConfig({
   plugins: [
     react(),
     svgr(),
     nodePolyfills({
-      include: ['crypto', 'stream', 'vm'],
+      include: ['crypto', 'stream', 'vm', 'util'],
       protocolImports: true,
     }),
   ],
