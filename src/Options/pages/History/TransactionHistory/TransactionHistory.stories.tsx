@@ -1,8 +1,29 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Provider } from 'jotai'
+import { Provider, createStore } from 'jotai'
+import { networkAtom } from '../../../../_general/utils/Atom.js'
 
 import TransactionHistory, { Props } from './index.js'
 import { Address } from 'symbol-sdk'
+
+const mainDecorator = (Story: any) => {
+  const store = createStore()
+  store.set(networkAtom, 'https://sym-main-01.opening-line.jp:3001') // Main用URL
+  return (
+    <Provider store={store}>
+      <Story />
+    </Provider>
+  )
+}
+
+const testDecorator = (Story: any) => {
+  const store = createStore()
+  store.set(networkAtom, 'https://sym-test-01.opening-line.jp:3001') // Test用URL
+  return (
+    <Provider store={store}>
+      <Story />
+    </Provider>
+  )
+}
 
 const meta: Meta<Props> = {
   title: 'Option/TransactionHistory',
@@ -11,13 +32,6 @@ const meta: Meta<Props> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <Provider>
-        <Story />
-      </Provider>
-    ),
-  ],
 } satisfies Meta<Props>
 
 export default meta
@@ -29,12 +43,14 @@ export const Main: Story = {
       'NAW7L44MVKCVBM6IGEBXLF2K7JYKEP6R5XMCEZA',
     ),
   },
+  decorators: [mainDecorator],
 }
 
 export const Test: Story = {
   args: {
     address: Address.createFromRawAddress(
-      'TD55KXAFNATAHOPEDST2V4MLOL43DGCELZS6PGA',
+      'TBZN46UIU5BFLJI46VB4JTHHCE5EN2RFLR7NX3A',
     ),
   },
+  decorators: [testDecorator],
 }
